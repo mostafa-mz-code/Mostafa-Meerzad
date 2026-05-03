@@ -1,17 +1,11 @@
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Urbanist } from "next/font/google";
-import dynamic from "next/dynamic";
 import structuredData from "../structured-data.json";
 import Footer from "./Footer";
 import "./globals.css";
 import LayoutWrapper from "./LayoutWrapper";
 import Navbar from "./Navbar";
 import ToasterComponent from "./ToasterComponent";
-
-const DynamicThemeProvider = dynamic(
-  () => import("@/components/ui/theme-provider").then((mod) => mod.ThemeProvider),
-  { ssr: false }
-);
 
 export const metadata = {
   title: "Mostafa Meerzad | Full Stack Developer",
@@ -71,7 +65,7 @@ export default function RootLayout({
         />
         <ToasterComponent />
         <LayoutWrapper>
-          <DynamicThemeProvider
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -80,7 +74,7 @@ export default function RootLayout({
             <Navbar />
             <main className="px-3 md:px-8 lg:px-12">{children}</main>
             <Footer />
-          </DynamicThemeProvider>
+          </ThemeProvider>
         </LayoutWrapper>
       </body>
     </html>
