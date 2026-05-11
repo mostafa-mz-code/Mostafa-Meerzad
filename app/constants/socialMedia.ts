@@ -39,29 +39,9 @@ const socialMedia: SocialMediaType[] = [
     },
   },
   {
-    Img: GrInstagram,
-    href: "https://www.instagram.com/mostafameerzad/",
-    hover: "Instagram",
-    opts: {
-      target: "_blank",
-      rel: "noopener noreferrer",
-      ariaLabel: "instagram",
-    },
-  },
-  {
-    Img: FaFacebookF,
-    href: "https://www.facebook.com/mostafa.meerzad.5",
-    hover: "Facebook",
-    opts: {
-      target: "_blank",
-      rel: "noopener noreferrer",
-      ariaLabel: "facebook",
-    },
-  },
-  {
     Img: RiWhatsappFill,
     href: "https://wa.me/93790306378?text=Hi%20Mostafa%2C%20I%20came%20across%20your%20portfolio%20and%20wanted%20to%20connect%21",
-    hover: "Say Hi on Whatsapp",
+    hover: "Whatsapp",
     opts: {
       target: "_blank",
       rel: "noopener noreferrer",
@@ -72,7 +52,7 @@ const socialMedia: SocialMediaType[] = [
   {
     Img: BiLogoGmail,
     href: "mailto:mostafameerzad@gmail.com?subject=👋%20Let's%20Talk%20About%20a%20Project",
-    hover: "Send me an Email",
+    hover: "Email",
     opts: {
       target: "_self",
       rel: "",

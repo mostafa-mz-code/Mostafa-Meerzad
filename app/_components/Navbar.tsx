@@ -1,7 +1,7 @@
-import MobileDrawer from "./_components/MobileDrawer";
-import ModeToggle from "./_components/ModeToggle";
-import Name from "./_components/Name";
-import Navigation from "./_components/Navigation";
+import MobileDrawer from "./MobileDrawer";
+import ModeToggle from "./ModeToggle";
+import Name from "./Name";
+import Navigation from "./Navigation";
 
 const Navbar = () => {
   return (

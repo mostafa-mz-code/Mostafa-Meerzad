@@ -24,9 +24,7 @@ export default function LayoutWrapper({ children }: Props) {
   })();
 
   return (
-    <div
-      className={`${backgroundClass} bg-cover bg-no-repeat max-w-[1440px] mx-auto`}
-    >
+    <div className={`${backgroundClass} bg-cover bg-no-repeat  mx-auto`}>
       {children}
     </div>
   );
