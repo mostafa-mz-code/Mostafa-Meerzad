@@ -1,74 +1,100 @@
-"use client"
-import { m as motion, LazyMotion, domAnimation, easeOut } from "framer-motion";
-import { skillsAndTools } from "../constants/skills";
-import { Badge } from "@/components/ui/badge";
+import React from "react";
+import { FaCircle } from "react-icons/fa";
 
-// Variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: easeOut },
-  },
+type Skill = {
+  title: string;
+  tools: string[];
 };
-
-const staggerContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
+const skills: Skill[] = [
+  {
+    title: "Frontend Development",
+    tools: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "ShadCN UI",
+      "Framer Motion",
+      "Zustand",
+      "React Native",
+    ],
   },
+  {
+    title: "Backend Development",
+    tools: [
+      "Node.js",
+      "Express.js",
+      "Next.js API Routes",
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Prisma ORM",
+      "REST APIs",
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    tools: [
+      "Git & GitHub",
+      "VSCode",
+      "WebStorm",
+      "Postman",
+      "Docker",
+      "Linux CLI",
+      "Vercel",
+      "Figma handoff",
+      "Jest",
+    ],
+  },
+];
+
+type Props = {
+  title: string;
+  tools: string[];
+  index: number;
 };
-
-
-const SkillsAndTools = ()=>(
-  <LazyMotion features={domAnimation}>
-  <motion.div
-    className="flex flex-col items-center gap-8"
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.3 }}
-    variants={staggerContainer}
-  >
-    <motion.h2 className="h2" variants={fadeInUp}>Skills & Tools</motion.h2>
-
-    <motion.ul
-      className="flex justify-around items-start flex-col md:flex-row gap-5 p-5 border rounded-xl w-full background"
-      variants={staggerContainer}
+const SkillCard = ({ title, tools, index }: Props) => {
+  return (
+    <li
+      className={`flex flex-col gap-4 border rounded-md p-8 ${index === 1 ? " bg-primary/7 rounded-none md:border-r-0 md:border-l-0" : index === 0 ? " md:rounded-tr-none max-md:rounded-bl-none rounded-br-none" : index === 2 ? "max-md:rounded-tr-none rounded-tl-none md:rounded-bl-none" : ""} `}
     >
-      {skillsAndTools.map((item) => (
-        <motion.li key={item.title} variants={fadeInUp}>
-          <motion.h3
-            className="text-xl font-semibold mb-3 capitalize"
-            variants={fadeInUp}
+      <h3 className="text-lg font-bold text-muted-foreground font-courier">
+        {title}
+      </h3>
+      <hr className="w-full h-[1px] bg-muted-foreground/20" />
+      <div className="grid grid-cols-2 md:grid-cols-1  gap-2 mt-2 ">
+        {tools.map((tool, toolIndex) => (
+          <div
+            key={toolIndex}
+            className="flex justify-start items-center gap-2 text-muted-foreground font-courier text-sm relative"
           >
-            {item.title}
-          </motion.h3>
-          <motion.ul
-            className="flex md:flex-col lg:flex-row lg:w-32 xl:w-52 gap-2 lg:gap-3 flex-wrap"
-            variants={staggerContainer}
-          >
-            {item.skillSet.map(({ name, Img }) => (
-              <motion.li
-                key={name}
-                className="cursor-default"
-                variants={fadeInUp}
-              >
-                <Badge className="bg-[#122234] text-gray-100 dark:bg-zinc-800">
-                  {name} <Img />
-                </Badge>
-              </motion.li>
-            ))}
-          </motion.ul>
-        </motion.li>
-      ))}
-    </motion.ul>
-  </motion.div>
-</LazyMotion>
+            <FaCircle className="size-1 text-primary" /> {tool}
+        
+          </div>
+        ))}
+      </div>
+    </li>
+  );
+};
+const SkillsAndTools = () => {
+  return (
+    <section className="relative flex flex-col gap-10 section-padding !pt-10 bg-radial from-[rgba(10,10,15,0.6)]/20 to-darkblue">
+      {/*--------------- badge -------------*/}
+      <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
+        Skills & tools
+        <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
+      </div>
 
-)
+      {/* ------------ skills & tools ------------- */}
 
-export default SkillsAndTools
+      <ul className="grid grid-cols-1 md:grid-cols-3 ">
+        {skills.map((item, index) => (
+          <SkillCard {...item} index={index} key={index} />
+        ))}
+      </ul>
+    </section>
+  );
+};
+
+export default SkillsAndTools;

@@ -1,17 +1,12 @@
-import React from "react";
-import { socialMedia } from "./constants/socialMedia";
 import Link from "next/link";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { socialMedia } from "./constants/socialMedia";
 
 const Footer = () => {
   return (
-    <footer className="flex justify-between items-center border-t p-8 px-3 md:px-8 lg:px-12 bg-darkblue text-muted-foreground">
+    <footer className="flex flex-col md:flex-row max-md:gap-8 justify-between items-center border-t pb-12 p-8 px-3 md:px-8 lg:px-12 bg-darkblue text-muted-foreground">
       <h2 className="font-courier text-sm tracking-widest text-muted-foreground/50">
-        Mostafa Meerzad · Full Stack Developer
+        Mostafa Meerzad{" "}
+        <span className={"hidden md:visible"}>· Full Stack Developer</span>
       </h2>
       <ul className="flex justify-center gap-5">
         {socialMedia
@@ -25,14 +20,9 @@ const Footer = () => {
                 aria-label={ariaLabel}
                 className={"border py-2 px-3 text-sm font-courier rounded-sm"}
               >
-                {/*<Tooltip>*/}
-                {/*  <TooltipTrigger asChild>*/}
-                {/*    <Img className="size-[25px]" />*/}
-                {/*  </TooltipTrigger>*/}
-                {/*  <TooltipContent className="font-semibold">*/}
+               
                 {hover}
-                {/*  </TooltipContent>*/}
-                {/*</Tooltip>*/}
+                
               </Link>
             </li>
           ))}

@@ -1,71 +1,64 @@
-"use client";
-import { LazyMotion, domAnimation, easeOut, m as motion } from "framer-motion";
-import { funFacts } from "../constants/funFacts";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.2,
-    },
-  },
+import React from "react";
+import { IconType } from "react-icons";
+import { FaPaintbrush } from "react-icons/fa6";
+import { GiFullMotorcycleHelmet, GiGamepad, GiTinker } from "react-icons/gi";
+type Fact = {
+  title: string;
+  desc: string;
+  icon: IconType;
 };
 
-const item = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.4, ease: easeOut },
+const facts: Fact[] = [
+  {
+    title: "Gamer",
+    desc: "GTA, COD, story-driven chaos — gaming is my favorite way to unwind and explore creative worlds.",
+    icon: GiGamepad,
   },
-};
-
-const titleVariant = {
-  hidden: { opacity: 0, y: -20, scale: 0.9 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: easeOut },
+  {
+    title: "Tinkerer",
+    desc: "I naturally look for hidden potential in things. If it can be opened, customized, or improved, I've probably tried it.",
+    icon: GiTinker,
   },
-};
+  {
+    title: "Bike enthusiast",
+    desc: "Adventure rides, late-night tuning, engine sounds — I love bikes. Debugging code and fixing machines feel surprisingly similar.",
+    icon: GiFullMotorcycleHelmet,
+  },
+  {
+    title: "Creative roots",
+    desc: "Growing up with a designer brother and painter sister made creativity part of everyday life. Good design feels personal to me.",
+    icon: FaPaintbrush,
+  },
+];
 
+type Props = { title: string; desc: string; icon: IconType; index: number };
+const FactCard = ({ title, desc, icon: Icon, index }: Props) => {
+  return (
+    <li
+      className={`flex flex-col gap-3 p-5 font-georgia ${index % 2 !== 0 ? "bg-primary/20 rounded-lg" : "bg-muted/30 rounded-lg"}`}
+    >
+      <Icon className={"text-primary size-5"} />
+      <h3 className={"text-xl text-foreground"}>{title}</h3>
+      <p className={"text-muted-foreground text-sm font-courier"}>{desc}</p>
+    </li>
+  );
+};
 const FunFacts = () => {
   return (
-    <LazyMotion features={domAnimation}>
-      <motion.div
-        className="flex flex-col border rounded-xl px-5 py-8 background"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={container}
-      >
-        <motion.h2 className="h2 mb-10 text-center" variants={titleVariant}>
-          Fun Facts About Me
-        </motion.h2>
+    <section className="relative flex flex-col gap-10 section-padding !pt-10 bg-radial from-[rgba(10,10,15,0.6)]/20 to-darkblue">
+      {/*--------------- badge -------------*/}
+      <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
+        A bit more about me
+        <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
+      </div>
 
-        <motion.ul
-          className="flex flex-col gap-5 md:flex-row flex-wrap md:justify-between md:items-center"
-          variants={container}
-        >
-          {funFacts.map(({ title, Icon, desc }) => (
-            <motion.li
-              key={title}
-              className="flex flex-col items-center md:items-start md:w-80 lg:w-96 xl:w-64 gap-2"
-              variants={item}
-            >
-              <h3 className="flex items-center gap-3 text-2xl font-semibold">
-                {title} <Icon className="size-7" />
-              </h3>
-              <p className="text-md leading-tight">{desc}</p>
-            </motion.li>
-          ))}
-        </motion.ul>
-      </motion.div>
-    </LazyMotion>
+      {/* ------------ more about me ------------- */}
+      <ul className={"flex flex-col md:flex-row mt-5 gap-1"}>
+        {facts.map((item, index) => (
+          <FactCard {...item} index={index} key={index} />
+        ))}
+      </ul>
+    </section>
   );
 };
 

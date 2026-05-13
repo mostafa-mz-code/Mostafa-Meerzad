@@ -1,163 +1,79 @@
-"use client";
+import Link from "next/link";
+import React from "react";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { GrCertificate } from "react-icons/gr";
 
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
-import {
-  LazyMotion,
-  domAnimation,
-  easeInOut,
-  easeOut,
-  m as motion,
-} from "framer-motion";
-import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
-import { certificates } from "../constants/certificates";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
-};
-
-const fadeRight = {
-  hidden: { opacity: 0, x: -30 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOut } },
-};
-
-const stagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
+const certificates = [
+  {
+    title: "Responsive Web Design",
+    subtitle: "FreeCodeCamp · V8",
+    href: "",
   },
-};
-
-const certItem = {
-  hidden: { opacity: 0, scale: 0.8, rotate: -15 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    rotate: 0,
-    transition: { duration: 0.5, ease: easeOut },
+  {
+    title: "Front-End Development Libraries",
+    subtitle: "FreeCodeCamp · V8",
+    href: "",
   },
-};
-
-const textStagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
+  {
+    title: "Back-End Development and APIs",
+    subtitle: "FreeCodeCamp · V8",
+    href: "",
   },
-};
+  {
+    title: "JavaScript Algorithms and Data Structures",
+    subtitle: "FreeCodeCamp · V7",
+    href: "",
+  },
+  {
+    title: "Full Stack Development Internship",
+    subtitle: "Coding Samurai · 2025",
+    href: "",
+  },
+];
 
-const lineVariant = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeInOut } },
-};
-
-const Certificates = () => {
-  const [selectedCert, setSelectedCert] = useState<{
-    img: string | StaticImageData;
-    title: string;
-  } | null>(null);
-
+type Props = { title: string; subtitle: string; href: string; index: number };
+const CertificateCard = ({ title, subtitle, href, index }: Props) => {
   return (
-    <LazyMotion features={domAnimation}>
-      <motion.div
-        className="border rounded-xl background p-5 flex flex-col lg:flex-row lg:justify-between items-center"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
+    <li
+      className={`flex flex-col md:flex-row items-start max-md:gap-5 md:items-center justify-between p-5 font-courier ${(index + 1) % 2 === 0 && "bg-primary/10 rounded-lg border-l-1 border-primary"} `}
+    >
+      <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center border border-primary/30 bg-primary/15 p-3 rounded-md">
+          <GrCertificate />
+        </div>
+        <div>
+          <h3 className="text-foreground text-base">{title}</h3>
+          <span className="text-sm text-muted-foreground">{subtitle}</span>
+        </div>
+      </div>
+      <Link
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cursor-pointer text-sm  text-primary px-5 leading-tight border border-primary/20 rounded-md flex justify-center items-center gap-2 h-10"
       >
-        {/* Left Text Block */}
-        <motion.div
-          className="flex flex-col items-center lg:items-start gap-5 lg:w-[40%]"
-          variants={fadeRight}
-        >
-          <h2 className="h2">Certifications</h2>
+        verify <FaLongArrowAltRight className="size-3" />
+      </Link>
+    </li>
+  );
+};
+const Certificates = () => {
+  return (
+    <section className="relative flex flex-col gap-10 section-padding !pt-10 bg-radial from-[rgba(10,10,15,0.6)]/20 to-darkblue">
+      {/*--------------- badge -------------*/}
+      <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
+        Certifications
+        <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
+      </div>
 
-          <motion.div
-            className="text text-center lg:text-start flex flex-col gap-1"
-            variants={textStagger}
-          >
-            <motion.p variants={lineVariant}>
-              Here are some of the certifications I’ve earned along my
-              self-taught journey —
-            </motion.p>
-            <motion.p variants={lineVariant}>
-              from FreeCodeCamp, Coding Samurai, and others.
-            </motion.p>
-            <motion.p variants={lineVariant}>
-              Each one marks a major milestone in my growth as a developer.
-            </motion.p>
-          </motion.div>
-        </motion.div>
+      {/* ------------- certificates --------------- */}
 
-        {/* Certificate Stack */}
-        <motion.div
-          className="relative w-full lg:w-1/2 h-96 sm:h-[470px] md:h-[550px]"
-          variants={stagger}
-        >
-          <div className="absolute left-[15%] sm:left-[20%] top-[35%] md:left-[20%] md:top-[28%] lg:-left-5 xl:left-10">
-            {certificates.map(({ img, title }, i) => (
-              <motion.div key={title} variants={certItem}>
-                <Card
-                  onClick={() => setSelectedCert({ img, title })}
-                  className="absolute cursor-pointer transition-transform duration-200 hover:scale-115 hover:z-10 hover:!rotate-0 bg-[#122234] dark:bg-zinc-800"
-                  style={{
-                    rotate: `${-45 + i * 15}deg`,
-                    left: `${i * 2.5}rem`,
-                    top: `-${i * 1.5}rem`,
-                  }}
-                >
-                  <CardContent className="size-40 sm:size-56 md:size-72 overflow-hidden">
-                    <Image
-                      width={400}
-                      height={400}
-                      placeholder="blur"
-                      alt={title}
-                      src={img}
-                      className="w-full h-full object-cover"
-                    />
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Modal for Certificate */}
-      <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
-        <DialogContent className="max-w-4xl w-full p-4">
-          {selectedCert && (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedCert.title}</DialogTitle>
-              </DialogHeader>
-              <div className="w-full max-h-[70vh] overflow-auto rounded-md">
-                <Image
-                  src={selectedCert.img}
-                  alt={selectedCert.title}
-                  width={1000}
-                  height={1000}
-                  className="w-full h-auto object-contain rounded"
-                />
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
-    </LazyMotion>
+      <ul className="flex flex-col">
+        {certificates.map((item, index) => (
+          <CertificateCard {...item} index={index} key={index} />
+        ))}
+      </ul>
+    </section>
   );
 };
 

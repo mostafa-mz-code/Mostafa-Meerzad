@@ -1,99 +1,90 @@
 "use client";
+import React, { useState, useEffect } from "react";
 
-import Image from "next/image";
-import React from "react";
-import selfBuilt from "../assets/self-built.webp";
-import {
-  LazyMotion,
-  domAnimation,
-  easeInOut,
-  m as motion,
-} from "framer-motion";
-
-// Animation Variants
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: easeInOut },
-  },
+type Props = {
+  datetime: string;
+  title: string;
+  desc: string;
+  className?: string;
 };
-
-const imageFade = {
-  hidden: { opacity: 0, scale: 0.97, x: 10 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    x: 0,
-    transition: { duration: 1.2, ease: easeInOut, delay: 0.4 },
-  },
-};
-
-const container = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: easeInOut,
-      when: "beforeChildren",
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const Journey = () => {
+const JourneyCard = ({ datetime, title, desc, className }: Props) => {
   return (
-    <LazyMotion features={domAnimation}>
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
+    <div className={`flex flex-col gap-5 p-5 ${className}`}>
+      <span
+        className={
+          "  w-fit  rounded-full text-[.7rem]  text-primary font-courier -mb-2"
+        }
       >
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_0.8fr] md:grid-rows-[0.1fr_.5fr] gap-5 justify-items-center md:justify-items-start md:items-center border background rounded-2xl py-3 md:p-5 px-3">
-          {/* Title */}
-          <motion.h2
-            className="col-start-1 col-end-2 md:col-end-3 md:row-start-1 md:row-end-2 h2"
-            variants={fadeUp}
-          >
-            My Journey
-          </motion.h2>
-
-          {/* Paragraph */}
-          <motion.p
-            className="col-start-1 col-end-2 md:row-start-2 md:row-end-3 text-center md:text-start text px-5 md:px-0 md:self-start"
-            variants={fadeUp}
-          >
-            My journey began in 2019 when I got accepted to Kabul University for
-            software engineering. Then came challenges: COVID-19, a university
-            attack, and the collapse of the government in 2021. I left college,
-            but not my dream. With determination, I turned to the internet and
-            taught myself full-stack development using FreeCodeCamp, YouTube,
-            and tons of projects. Now, I’ve built 150+ projects, earned multiple
-            certifications, and landed an internship, all self-driven.
-          </motion.p>
-
-          {/* Image */}
-          <motion.div
-            className="col-start-1 md:col-start-2 col-end-2 md:col-end-3 md:row-start-1 md:row-end-3 w-auto h-[380px] object-contain lg:justify-self-end rounded-xl md:object-cover"
-            variants={imageFade}
-          >
-            <Image
-              width={400}
-              height={400}
-              placeholder="blur"
-              src={selfBuilt}
-              alt="self built"
-              className="w-full h-full object-contain md:object-cover rounded-xl"
-            />
-          </motion.div>
-        </div>
-      </motion.div>
-    </LazyMotion>
+        {datetime}
+      </span>
+      <h2 className={"text-2xl font-georgia"}>{title}</h2>
+      <p className={"text-muted-foreground/70  md:w-4/5"}>{desc}</p>
+    </div>
   );
 };
 
+const Journey = () => {
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsLargeScreen(window.innerWidth >= 1024);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  const journey = [
+    {
+      datetime: "2019",
+      title: "Where it started",
+      desc: "Accepted to Kabul University for software engineering. First real exposure to programming — realized this was exactly what I wanted to do.",
+    },
+    {
+      datetime: "2020 – 2021",
+      title: "The pivot",
+      desc: "Circumstances made continuing university impossible. Made a decision: if school wasn't an option, I'd build my own curriculum. Opened a browser and never looked back.",
+    },
+    {
+      datetime: "2021 – 2023",
+      title: "Self-built",
+      desc: "FreeCodeCamp, YouTube, GitHub — project after project. Earned four certifications. Built 160+ repos. Landed a Coding Samurai internship entirely on the strength of what I'd shipped. No degree. Just code.",
+    },
+    {
+      datetime: "2024 – Present",
+      title: "Professional",
+      desc: "Joined Webistan.cloud as a Full Stack Developer. Shipped two production applications for real clients. Now looking for a bigger challenge — remote or in Kabul.",
+    },
+  ];
+  return (
+    <section
+      className={
+        "relative flex flex-col gap-10 section-padding !pt-10 bg-gradient-to-l from-[rgba(10,10,15,0.6)]/20 to-darkblue"
+      }
+    >
+      {/*--------------- badge -------------*/}
+      <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
+        my journey
+        <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
+      </div>
+
+      {/* ----------- parts of journey -------------- */}
+      <div className={"grid lg:grid-cols-2 gap-5 px-5"}>
+        {journey.map((item, index) => {
+          const position = index + 1;
+          const isSpecial = isLargeScreen
+            ? position % 4 === 1 || position % 4 === 0
+            : index % 2 === 0;
+
+          return (
+            <JourneyCard
+              {...item}
+              key={item.title}
+              className={`${isSpecial ? "border-l border-primary/70 rounded-tl-md rounded-bl-md bg-gradient-to-r to-[rgba(10,10,15,0.6)]/20 from-primary/10" : ""}`}
+            />
+          );
+        })}
+      </div>
+    </section>
+  );
+};
 export default Journey;

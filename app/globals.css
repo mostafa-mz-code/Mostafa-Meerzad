@@ -46,7 +46,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@theme{
+@theme {
   --color-primary: #3ecf8e;
   --color-secondary: #3ecf8e4d;
   --color-darkblue: #0a0b10;
@@ -148,7 +148,7 @@
 
 @layer utilities {
   .background {
-    @apply bg-zinc-300/40 dark:bg-zinc-900/40 ;
+    @apply bg-zinc-300/40 dark:bg-zinc-900/40;
   }
   .text {
     @apply text-lg lg:text-xl lg:leading-relaxed;
@@ -156,13 +156,13 @@
   .h2 {
     @apply text-4xl font-semibold;
   }
-  .padding{
-    @apply px-3 md:px-8 lg:px-12
+  .padding {
+    @apply px-3 md:px-8 lg:px-12;
   }
-  .section-padding{
-    @apply px-5 md:px-8 lg:px-12  py-28 pb-12
+  .section-padding {
+    @apply px-5 md:px-8 lg:px-12  py-28 pb-12;
   }
-  .badge-position{
-    @apply  top-10 left-5 md:left-8 lg:left-12
+  .badge-position {
+    @apply top-10 left-5 md:left-8 lg:left-12;
   }
 }
