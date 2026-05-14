@@ -1,119 +1,207 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { z } from "zod";
 
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name is too short" }),
-  email: z.string().email({ message: "Enter a valid email" }),
-  message: z.string().min(10, { message: "Message is too short" }),
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name is too long"),
+
+  email: z.email("Please enter a valid email address"),
+
+  subject: z
+    .string()
+    .min(2, "Subject must be at least 2 characters")
+    .max(100, "Subject is too long"),
+
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(1000, "Message is too long"),
 });
 
 const ContactForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const response = await fetch("https://formspree.io/f/mzzvbnyy", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    // Validate with Zod
+    const validation = contactSchema.safeParse({
+      name,
+      email,
+      subject,
+      message,
     });
-    if (response.ok) {
-      toast.success("Message sent!");
-      form.reset()
-    } else {
-      toast.error("Failed to send message.");
+
+    if (!validation.success) {
+      const firstError =
+        validation.error.issues[0]?.message || "Please check your inputs.";
+
+      toast.error(firstError);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(validation.data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+
+        const errorMessage =
+          errorData?.error || "Unable to send message. Please try again.";
+
+        toast.error(errorMessage);
+        return;
+      }
+
+      toast.success("Message sent successfully!");
+
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <Form {...form}>
+    <div className={"flex flex-col p-5 md:p-10 gap-6 "}>
+      {/*--------------- badge -------------*/}
+      <div className="flex justify-start items-center gap-3 badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
+        Send a message
+        <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
+      </div>
+
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 flex flex-col"
+        onSubmit={handleSubmit}
+        className="w-full grid gap-5 p-3 md:p-5 rounded-lg font-courier text-sm bg-gradient-to-r from-gray-800/25"
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your Name"
-                  {...field}
-                  className="bg-zinc-300"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className={"flex gap-5"}>
+          {/* ----------- Name--------------- */}
+          <div className="flex flex-col gap-2 w-full">
+            <label
+              htmlFor="name"
+              className="text-sm font-medium text-muted-foreground"
+            >
+              Your Name
+            </label>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder="you@example.com"
-                  {...field}
-                  className="bg-zinc-300"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+            />
+          </div>
 
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Your message..."
-                  className="resize-none bg-zinc-300"
-                  rows={6}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button className="bg-primary text-primary-foreground hover:bg-primary/80 transition-all mt-2">
-          Send Message
-        </Button>
+          {/* --------- Email ------------ */}
+          <div className="flex flex-col gap-2 w-full">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-muted-foreground"
+            >
+              Email Address
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+            />
+          </div>
+        </div>
+
+        {/* Subject */}
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="subject"
+            className="text-sm font-medium text-muted-foreground"
+          >
+            Subject
+          </label>
+
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder="Your subject"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+          />
+        </div>
+
+        {/* Message */}
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="message"
+            className="text-sm font-medium text-muted-foreground"
+          >
+            Message
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Your message..."
+            rows={6}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="resize-none bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+          />
+        </div>
+
+        <div className={"flex items-center justify-between"}>
+          <span className={"text-xs text-muted-foreground/80 font-courier"}>
+            I&apos;ll reply within 24 hours.
+          </span>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={
+              "self-end bg-primary/70 text-primary-foreground hover:bg-primary/80 font-courier text-sm transition-all mt-2 rounded-md px-6 py-2 cursor-pointer flex justify-center items-center gap-2 " +
+              (isSubmitting ? "opacity-70 cursor-not-allowed" : "")
+            }
+          >
+            {isSubmitting ? "Sending..." : "Send Message"}
+
+            <FaLongArrowAltRight />
+          </button>
+        </div>
       </form>
-    </Form>
+    </div>
   );
 };
 

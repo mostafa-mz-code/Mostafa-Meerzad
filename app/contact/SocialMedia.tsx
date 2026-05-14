@@ -1,66 +1,72 @@
-"use client";
-
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { m as motion } from "framer-motion";
-import Link from "next/link";
+import React from "react";
+import { IoMdStopwatch } from "react-icons/io";
 import { socialMedia } from "../constants/socialMedia";
+import Link from "next/link";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { GoArrowUpRight } from "react-icons/go";
 
 const SocialMedia = () => {
   return (
-    <>
-      <motion.h2
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="h2 mb-10"
-      >
-        Connect with me on social media
-      </motion.h2>
+    <div
+      className={
+        "flex flex-col gap-5 md:gap-8 p-5 md:p-10 font-courier text-muted-foreground/85"
+      }
+    >
+      <p>
+        I&apos;m currently open to{" "}
+        <strong className={"text-white"}>full-time remote roles</strong> and
+        onsite opportunities in Kabul. If you&apos;re building something
+        interesting and need a developer who takes ownership —{" "}
+        <strong className={"text-white"}>let&apos;s talk. </strong>
+      </p>
 
-      <motion.ul
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="flex flex-wrap justify-center md:justify-center gap-5 lg:gap-8 lg:max-w-4xl mx-auto px-5 md:px-0"
+      <div
+        className={
+          "flex flex-row items-center gap-3 border rounded-lg p-5 text-sm bg-gradient-to-tl from-primary/5 border-primary/10"
+        }
       >
+        <IoMdStopwatch className={"text-primary/70"} />
+        <div className={"flex flex-col"}>
+          <span>Typical response time: under 24 hours.</span>
+          <span className={"text-muted-foreground/50"}>
+            {" "}
+            Prefer a quick call? WhatsApp works great.
+          </span>
+        </div>
+      </div>
+
+      <ul className={"flex flex-col bg-gray-900/20 overflow-hidden gap-2"}>
         {socialMedia.map(
-          ({ Img, hover, href, opts: { ariaLabel, rel, target }, big }) => (
-            <motion.li
-              key={href}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className={`${big ? "w-auto md:w-[45%]" : ""}`}
+          ({ Img, btnLabel, label, href, link, opts, diff }, index) => (
+            <li
+              key={index}
+              className={`flex items-center justify-between p-5 gap-5  ${index % 2 === 0 ? "bg-gradient-to-r from-primary/20 border-l border-primary/70 rounded-lg" : " bg-gradient-to-l from-gray-800/20 border-r border-gray-800 rounded-lg"}`}
             >
-              <HoverBorderGradient containerClassName="w-full py-1">
-                <Link
-                  target={target}
-                  rel={rel}
-                  aria-label={ariaLabel}
-                  href={href}
-                  className="flex items-center justify-center gap-2  px-3 sm:px-8 md:px-5 w-full h-full"
-                >
-                  <motion.span
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="flex items-center justify-center"
-                  >
-                    <Img className="size-6" />
-                  </motion.span>
-                  <motion.p
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "tween", duration: 0.2 }}
-                    className="font-medium"
-                  >
-                    {hover}
-                  </motion.p>
-                </Link>
-              </HoverBorderGradient>
-            </motion.li>
-          )
+              <div className={"flex items-center justify-center gap-3"}>
+                <Img
+                  className={`size-10 border rounded-md p-2.5 ${diff ? " border-gray-500/30 bg-gray-500/10" : "border-primary/20 bg-primary/10"}`}
+                />
+                <div className={"flex flex-col items-start justify-center"}>
+                  <span className={"text-base "}>{label}</span>
+                  <span className={"text-xs"}>{link}</span>
+                </div>
+              </div>
+
+              <Link
+                href={href}
+                {...opts}
+                className={`flex items-center justify-center gap-1.5  border ${diff ? "border-gray-500/30" : "border-primary/30"}  rounded-sm text-xs py-1.5 px-4 cursor-pointer`}
+              >
+                {btnLabel}{" "}
+                <GoArrowUpRight
+                  className={`${diff ? "text-muted-foreground/80" : "text-primary/60"}`}
+                />
+              </Link>
+            </li>
+          ),
         )}
-      </motion.ul>
-    </>
+      </ul>
+    </div>
   );
 };
 

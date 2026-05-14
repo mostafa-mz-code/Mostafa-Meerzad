@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { socialMedia } from "./constants/socialMedia";
+import { footerSocialMedia } from "./constants/socialMedia";
 
 const Footer = () => {
   return (
@@ -9,9 +9,9 @@ const Footer = () => {
         <span className={"hidden md:visible"}>· Full Stack Developer</span>
       </h2>
       <ul className="flex justify-center gap-5">
-        {socialMedia
+        {footerSocialMedia
           .slice(0, 4)
-          .map(({ Img, hover, href, opts: { ariaLabel, rel, target } }) => (
+          .map(({ label, href, opts: { ariaLabel, rel, target } }) => (
             <li key={href}>
               <Link
                 href={href}
@@ -20,9 +20,7 @@ const Footer = () => {
                 aria-label={ariaLabel}
                 className={"border py-2 px-3 text-sm font-courier rounded-sm"}
               >
-               
-                {hover}
-                
+                {label}
               </Link>
             </li>
           ))}

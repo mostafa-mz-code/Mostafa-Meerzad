@@ -26,11 +26,12 @@ export default function LayoutWrapper({ children }: Props) {
     return "bg-[url('/bg-default.webp')]";
   })();
 
-  const isProjectsPage = pathname.startsWith("/projects");
+  const isProjectsOrContactPage =
+    pathname.startsWith("/projects") || pathname.startsWith("/contact");
 
   return (
     <div className={`relative mx-auto bg-cover bg-repeat-y ${backgroundClass}`}>
-      {isProjectsPage && (
+      {isProjectsOrContactPage && (
         <div className="absolute inset-0 bg-black/45 pointer-events-none" />
       )}
 
