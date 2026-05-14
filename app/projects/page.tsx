@@ -1,20 +1,21 @@
-"use client";
-import ProjectsList from "@/components/ui/ProjectsList";
-import { motion } from "framer-motion";
+// "use client";
+import ProjectsList from "@/app/projects/ProductionWork";
+import Header from "./Header";
+import PersonalProjects from "./PersonalProjects";
+import TutorialProjects from "./TutorialProjects";
 
 const ProjectsPage = () => {
   return (
-    <div className="grid  pt-8 md:pt-16 pb-10 gap-12">
-      <motion.h2
-        initial={{ scale: 0.95, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        className=" justify-self-center md:justify-self-start h2"
-      >
-        Projects
-      </motion.h2>
+    <section
+      className={
+        "flex flex-col bg-gradient-to-b from-[rgba(10,10,15,0.6)]/10 to-darkblue "
+      }
+    >
+      <Header />
       <ProjectsList />
-    </div>
+      <PersonalProjects />
+      <TutorialProjects />
+    </section>
   );
 };
 

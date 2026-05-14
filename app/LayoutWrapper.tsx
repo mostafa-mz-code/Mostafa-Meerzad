@@ -10,22 +10,31 @@ interface Props {
 export default function LayoutWrapper({ children }: Props) {
   const pathname = usePathname();
 
-  // Define background classes based on pathname
   const backgroundClass = (() => {
     if (pathname === "/")
-      return "bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')] !bg-contain bg-repeat ";
+      return "bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')]";
+
     if (pathname.startsWith("/about"))
-      return "\"bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')] !bg-contain bg-repeat ";
+      return "bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')]";
+
     if (pathname.startsWith("/projects"))
-      return "bg-[url('/bg-projects-light-mobile.jpg')] dark:bg-[url('/bg-projects-dark-mobile.jpg')] md:bg-[url('/bg-projects-light.webp')] md:dark:bg-[url('/bg-projects-dark.webp')] !bg-contain bg-repeat";
+      return "bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')]";
+
     if (pathname.startsWith("/contact"))
-      return "bg-[url('/bg-contact-light-mobile.jpg')] dark:bg-[url('/bg-contact-dark-mobile.jpg')] md:bg-[url('/bg-contact-light.webp')] md:dark:bg-[url('/bg-contact-dark.webp')] !bg-contain bg-repeat";
+      return "bg-[url('/bg-home-light-mobile.jpg')] dark:bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-light.webp')] md:dark:bg-[url('/bg-home-dark.webp')]";
+
     return "bg-[url('/bg-default.webp')]";
   })();
 
+  const isProjectsPage = pathname.startsWith("/projects");
+
   return (
-    <div className={`${backgroundClass} bg-cover bg-no-repeat  mx-auto`}>
-      {children}
+    <div className={`relative mx-auto bg-cover bg-repeat-y ${backgroundClass}`}>
+      {isProjectsPage && (
+        <div className="absolute inset-0 bg-black/45 pointer-events-none" />
+      )}
+
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

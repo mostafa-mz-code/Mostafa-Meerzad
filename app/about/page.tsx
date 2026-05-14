@@ -7,14 +7,14 @@ import Experience from "@/app/about/Experience";
 
 const AboutPage = () => {
   return (
-    <div className="flex flex-col ">
+    <section className="flex flex-col ">
       <AboutMe />
       <Experience />
       <Journey />
       <SkillsAndTools />
       <Certificates />
       <FunFacts />
-    </div>
+    </section>
   );
 };
 
