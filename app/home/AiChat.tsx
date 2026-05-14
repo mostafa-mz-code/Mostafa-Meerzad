@@ -1,9 +1,23 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowUp, FaLocationArrow } from "react-icons/fa";
-import StarBorder from "@/components/StarBorder";
+import { motion, useInView } from "motion/react";
+import {
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+} from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const AiChat = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+  const userBubble = useAnimationVariants(slideInRight);
+  const aiBubble = useAnimationVariants(slideInLeft);
+
   const messages = [
     { msg: "Does he know PostgreSQL?", from: "user" },
     {
@@ -34,7 +48,6 @@ const AiChat = () => {
           "flex flex-col lg:flex-row gap-16 lg:gap-5 justify-between  "
         }
       >
-        {/*--------- AI chat ----------*/}
         <div className={"flex flex-col items-start gap-4 mt-14"}>
           <h1 className={"text-2xl font-georgia"}>Ask me anything</h1>
 
@@ -46,37 +59,37 @@ const AiChat = () => {
             — and nothing else.
           </p>
 
-          <Button
-            className={"!border-[#378add] !px-10 mt-10 "}
-            variant={"outline"}
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
           >
-            Start Chat <FaLocationArrow className={"size-3 text-[#378add]"} />
-          </Button>
-
-          {/*<StarBorder*/}
-          {/*  as="button"*/}
-          {/*  className=" text-xs font-courier p-0 "*/}
-          {/*  color="cyan"*/}
-          {/*  speed="4s"*/}
-          {/*  thickness={3}*/}
-          {/*>*/}
-          {/*  <div className={"flex justify-around items-center gap-4 mx-5 "}>*/}
-          {/*    Start Chat*/}
-          {/*    <FaLocationArrow className={"size-3 text-[#378add]"} />*/}
-          {/*  </div>*/}
-          {/*</StarBorder>*/}
+            <Button
+              className={"!border-[#378add] !px-10 mt-10 "}
+              variant={"outline"}
+            >
+              Start Chat <FaLocationArrow className={"size-3 text-[#378add]"} />
+            </Button>
+          </motion.div>
         </div>
 
-        {/* ------------ chat sample ----------*/}
-        <div className={"min-w-sm border bg-darkblue/70 p-6 rounded-lg "}>
-          <ul className={"list-none flex flex-col gap-3 w-lg"}>
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className={"min-w-sm border bg-darkblue/70 p-6 rounded-lg lg:w-lg "}
+        >
+          <ul className={"list-none flex flex-col gap-3 w-full "}>
             {messages.map(({ msg, from }, index) => (
-              <li
+              <motion.li
                 key={index}
+                variants={from === "user" ? userBubble : aiBubble}
                 className={`text-xs border-[0.5px] w-fit max-w-sm py-2 px-3 rounded-sm font-courier ${from === "user" ? "bg-lightblue/20 text-[#378add] text-right self-end" : " border-gray-600 bg-gray-800 text-gray-300/70 self-start"}`}
               >
                 {msg}
-              </li>
+              </motion.li>
             ))}
           </ul>
 
@@ -102,7 +115,7 @@ const AiChat = () => {
               <FaArrowUp className={"size-3"} />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

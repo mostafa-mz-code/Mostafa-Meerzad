@@ -1,6 +1,16 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { motion, useInView } from "motion/react";
+import {
+  fadeUp,
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+} from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 type Props = {
   badge: string;
@@ -11,6 +21,7 @@ type Props = {
   label: string;
   isPublic: boolean;
   className?: string;
+  slideVariant: typeof slideInLeft | typeof slideInRight;
 };
 const Project = ({
   badge,
@@ -21,9 +32,12 @@ const Project = ({
   isPublic,
   label,
   className,
+  slideVariant,
 }: Props) => {
+  const slide = useAnimationVariants(slideVariant);
+
   return (
-    <div className={`flex flex-col gap-5 ${className}`}>
+    <motion.div className={`flex flex-col gap-5 ${className}`} variants={slide}>
       <span
         className={
           "border border-primary/20 w-fit px-3 py-0.5 rounded-full text-[.7rem] bg-primary/10 text-primary font-courier -mb-2"
@@ -35,49 +49,68 @@ const Project = ({
       <p className={"text-muted-foreground/70 w-4/5"}>{desc}</p>
       <ul className={"flex flex-wrap gap-1.5 text-xs font-courier"}>
         {techs.map((tech, index) => (
-          <li
+          <motion.li
             key={index}
             className={
-              "px-2 py-0.5 border rounded-full text-muted-foreground/50"
+              "px-2 py-0.5 border border-muted-foreground/30 rounded-full text-muted-foreground/50 [will-change:transform]"
             }
+            whileHover={{
+              borderColor: "rgba(62,207,142,0.3)",
+              color: "rgba(255,255,255,0.7)",
+            }}
+            transition={{ duration: 0.15 }}
           >
             {tech}
-          </li>
+          </motion.li>
         ))}
       </ul>
       {isPublic ? (
-        <Link
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={
-            "flex  items-center  gap-1 text-primary text-sm font-courier"
-          }
+        <motion.div
+          className="[will-change:transform] w-fit"
+          whileHover={{ scale: 1.02, y: -1 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ duration: 0.15 }}
         >
-          {label} <FaArrowRightLong className={"size-3"} />
-        </Link>
+          <Link
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={
+              "flex  items-center  gap-1 text-primary text-sm font-courier"
+            }
+          >
+            {label} <FaArrowRightLong className={"size-3"} />
+          </Link>
+        </motion.div>
       ) : (
         <span className={"text-primary/50 text-sm font-courier"}>{label}</span>
       )}
-    </div>
+    </motion.div>
   );
 };
 
 const Experience = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const fade = useAnimationVariants(fadeUp);
+  const gridStagger = useAnimationVariants(staggerContainer);
+
   return (
     <section
+      ref={ref}
       className={
         "relative flex flex-col gap-5 section-padding !pt-10 bg-gradient-to-r from-[rgba(10,10,15,0.6)]/20 to-darkblue"
       }
     >
-      {/*--------------- badge -------------*/}
       <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
         experience
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
       </div>
 
-      {/*--------------- work experience -------------*/}
-      <div
+      <motion.div
+        variants={fade}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
         className={
           "flex flex-col md:flex-row max-md:gap-5 items-start md:items-center justify-between p-5 relative"
         }
@@ -102,9 +135,14 @@ const Experience = () => {
             "w-[98%] h-[1px] bg-muted-foreground/20 absolute bottom-0 left-0 right-0 mx-auto"
           }
         />
-      </div>
-      {/* --------------- projects delivered ------------- */}
-      <div className={"grid md:grid-cols-2 gap-10 p-5"}>
+      </motion.div>
+
+      <motion.div
+        className={"grid md:grid-cols-2 gap-10 p-5"}
+        variants={gridStagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         <Project
           badge={"Production · Backend focus"}
           title={"POS System"}
@@ -124,6 +162,7 @@ const Experience = () => {
           href={""}
           label={"Internal app · not publicly accessible"}
           isPublic={false}
+          slideVariant={slideInLeft}
         />
 
         <Project
@@ -144,8 +183,9 @@ const Experience = () => {
           href={"https://shereadsapp.com"}
           label={"shereadsapp.com"}
           isPublic={true}
+          slideVariant={slideInRight}
         />
-      </div>
+      </motion.div>
     </section>
   );
 };

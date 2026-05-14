@@ -4,12 +4,13 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import NavMenuTriggerLink from "./NavMenuTriggerLink";
 
 const HomeNav = () => {
   return (
     <NavigationMenuItem>
       <NavigationMenuTrigger>
-        <Link href="/">Home</Link>
+        <NavMenuTriggerLink href="/">Home</NavMenuTriggerLink>
       </NavigationMenuTrigger>
       <NavigationMenuContent>
         <div className="w-[450px] h-[160px] dark:bg-[url('/bg-home-dark.webp')] bg-[url('/bg-home-light.webp')] bg-no-repeat bg-cover flex justify-center items-center rounded-sm relative z-10 animate-fade-in ">

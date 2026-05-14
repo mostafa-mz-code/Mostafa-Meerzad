@@ -1,36 +1,36 @@
+"use client";
+
 import React from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import me from "../assets/me-vertical.png";
 import Image from "next/image";
-
-const CTAButtons = ({ className }: { className: string }) => {
-  return (
-    <div
-      className={`flex flex-wrap max-md:justify-center lg:flex-row gap-4 ${className}`}
-    >
-      <Button className={""} variant={"default"}>
-        See My Work
-      </Button>
-      <Button className={""} variant={"outline"}>
-        Download Resume
-      </Button>
-      <Button className={""} variant={"outline"}>
-        Ask My AI *
-      </Button>
-    </div>
-  );
-};
+import {
+  heroPhoto,
+  staggerContainer,
+  staggerItem,
+} from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const Hero = () => {
+  const stagger = useAnimationVariants(staggerContainer);
+  const item = useAnimationVariants(staggerItem);
+  const photoV = useAnimationVariants(heroPhoto);
+
   return (
     <div
       className={
         "flex flex-col md:flex-row justify-between items-center mx-auto md:gap-10 max-md:gap-8 max-md:py-16 py-14 padding"
       }
     >
-      <div className=" flex flex-col justify-center -mt-16 items-start gap-10 md:w-1/2 max-md:justify-center max-md:items-center max-md:text-center relative">
-        {/*------------ badge --------------*/}
-        <div
+      <motion.div
+        className=" flex flex-col justify-center -mt-16 items-start gap-10 md:w-1/2 max-md:justify-center max-md:items-center max-md:text-center relative"
+        variants={stagger}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div
+          variants={item}
           className={
             " flex justify-center items-center gap-2 text-primary max-md:hidden "
           }
@@ -39,9 +39,9 @@ const Hero = () => {
           <h2 className="text-xs font-courier font-light pt-1 ">
             Full Stack Developer
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-2">
+        <motion.div className="flex flex-col gap-2" variants={item}>
           <div className="flex items-center justify-center gap-5 md:flex-col md:items-start">
             <h1 className=" text-white text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-georgia ">
               Mostafa
@@ -50,7 +50,6 @@ const Hero = () => {
               Meerzad
             </h1>
           </div>
-          {/*------------- tech stacks ------------*/}
           <div
             className={
               "text-sm  md:text-sm lg:text-base xl:text-lg text-[#fff5] font-courier font-light "
@@ -70,12 +69,44 @@ const Hero = () => {
             shipping at <strong className={"text-white"}>Webistan.cloud</strong>{" "}
             — looking for my next challenge.
           </p>
-        </div>
+        </motion.div>
 
-        <CTAButtons className={"max-md:hidden"} />
-      </div>
+        <motion.div variants={item} className="max-md:hidden w-full">
+          <div className="flex flex-wrap gap-4">
+            <motion.div
+              className="[will-change:transform]"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Button variant={"default"}>See My Work</Button>
+            </motion.div>
+            <motion.div
+              className="[will-change:transform]"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Button variant={"outline"}>Download Resume</Button>
+            </motion.div>
+            <motion.div
+              className="[will-change:transform]"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Button variant={"outline"}>Ask My AI *</Button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="flex flex-col relative justify-center items-center max-md:mx-auto max-md:w-4/5 w-1/2 lg:w-3/5 lg:h-fit lg:min-w-[25rem] lg:max-w-2/5 p-2 xl:p-4 pb-4 pr-4 md:pb-8 md:pr-8 xl:pb-12 xl:pr-12">
+      <motion.div
+        className="flex flex-col relative justify-center items-center max-md:mx-auto max-md:w-4/5 w-1/2 lg:w-3/5 lg:h-fit lg:min-w-[25rem] lg:max-w-2/5 p-2 xl:p-4 pb-4 pr-4 md:pb-8 md:pr-8 xl:pb-12 xl:pr-12 [will-change:transform]"
+        variants={photoV}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="absolute bg-transparent size-10 xl:size-16 top-0 left-0 border-secondary border-l border-t rounded-tl-[4px]"></div>
         <div className="absolute bg-transparent size-16 lg:size-28 xl:size-40 bottom-0 right-0  border-primary border-r-2 border-b-2 rounded-br-sm lg:rounded-br-md"></div>
         <Image
@@ -83,8 +114,41 @@ const Hero = () => {
           alt={"me"}
           className={"  w-full h-full  object-contain"}
         />
-      </div>
-      <CTAButtons className={"md:hidden"} />
+      </motion.div>
+
+      <motion.div
+        variants={item}
+        initial="hidden"
+        animate="visible"
+        className="md:hidden w-full flex justify-center"
+      >
+        <div className="flex flex-wrap max-md:justify-center gap-4">
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Button variant={"default"}>See My Work</Button>
+          </motion.div>
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Button variant={"outline"}>Download Resume</Button>
+          </motion.div>
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Button variant={"outline"}>Ask My AI *</Button>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,9 +1,12 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { z } from "zod";
+import { motion, useInView } from "motion/react";
+import { fadeUp } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const contactSchema = z.object({
   name: z
@@ -30,6 +33,9 @@ const ContactForm = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef(null);
+  const isInView = useInView(formRef, { once: true, margin: "-80px" });
+  const fade = useAnimationVariants(fadeUp);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -80,7 +86,7 @@ const ContactForm = () => {
       setEmail("");
       setSubject("");
       setMessage("");
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
@@ -88,7 +94,13 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={"flex flex-col p-5 md:p-10 gap-6 "}>
+    <motion.div
+      ref={formRef}
+      variants={fade}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      className={"flex flex-col p-5 md:p-10 gap-6 "}
+    >
       {/*--------------- badge -------------*/}
       <div className="flex justify-start items-center gap-3 badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
         Send a message
@@ -109,7 +121,7 @@ const ContactForm = () => {
               Your Name
             </label>
 
-            <input
+            <motion.input
               id="name"
               name="name"
               type="text"
@@ -117,6 +129,11 @@ const ContactForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+              whileFocus={{
+                borderColor: "rgba(62,207,142,0.4)",
+                backgroundColor: "#131320",
+              }}
+              transition={{ duration: 0.15 }}
             />
           </div>
 
@@ -129,7 +146,7 @@ const ContactForm = () => {
               Email Address
             </label>
 
-            <input
+            <motion.input
               id="email"
               name="email"
               type="email"
@@ -137,6 +154,11 @@ const ContactForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+              whileFocus={{
+                borderColor: "rgba(62,207,142,0.4)",
+                backgroundColor: "#131320",
+              }}
+              transition={{ duration: 0.15 }}
             />
           </div>
         </div>
@@ -150,7 +172,7 @@ const ContactForm = () => {
             Subject
           </label>
 
-          <input
+          <motion.input
             id="subject"
             name="subject"
             type="text"
@@ -158,6 +180,11 @@ const ContactForm = () => {
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             className="bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+            whileFocus={{
+              borderColor: "rgba(62,207,142,0.4)",
+              backgroundColor: "#131320",
+            }}
+            transition={{ duration: 0.15 }}
           />
         </div>
 
@@ -170,7 +197,7 @@ const ContactForm = () => {
             Message
           </label>
 
-          <textarea
+          <motion.textarea
             id="message"
             name="message"
             placeholder="Your message..."
@@ -178,6 +205,11 @@ const ContactForm = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="resize-none bg-gray-900/20 text-muted-foreground rounded-md px-4 py-2 outline-none border border-gray-500/25 focus:border-primary transition-all"
+            whileFocus={{
+              borderColor: "rgba(62,207,142,0.4)",
+              backgroundColor: "#131320",
+            }}
+            transition={{ duration: 0.15 }}
           />
         </div>
 
@@ -187,21 +219,24 @@ const ContactForm = () => {
           </span>
 
           {/* Submit Button */}
-          <button
+          <motion.button
             type="submit"
             disabled={isSubmitting}
             className={
-              "self-end bg-primary/70 text-primary-foreground hover:bg-primary/80 font-courier text-sm transition-all mt-2 rounded-md px-6 py-2 cursor-pointer flex justify-center items-center gap-2 " +
+              "self-end bg-primary/70 text-primary-foreground hover:bg-primary/80 font-courier text-sm transition-all mt-2 rounded-md px-6 py-2 cursor-pointer flex justify-center items-center gap-2 [will-change:transform] " +
               (isSubmitting ? "opacity-70 cursor-not-allowed" : "")
             }
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.97, y: 0 }}
+            transition={{ duration: 0.15 }}
           >
             {isSubmitting ? "Sending..." : "Send Message"}
 
             <FaLongArrowAltRight />
-          </button>
+          </motion.button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

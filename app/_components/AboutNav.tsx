@@ -6,8 +6,8 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import Image from "next/image";
-import Link from "next/link";
 import ListItem from "./ListItem";
+import NavMenuTriggerLink from "./NavMenuTriggerLink";
 import me from "../assets/me-colored.webp";
 import { about } from "../constants/about";
 
@@ -15,7 +15,7 @@ const AboutNav = () => {
   return (
     <NavigationMenuItem>
       <NavigationMenuTrigger>
-        <Link href={"/about"}>About</Link>
+        <NavMenuTriggerLink href="/about">About</NavMenuTriggerLink>
       </NavigationMenuTrigger>
       <NavigationMenuContent >
         <ul className="grid gap-3 md:w-[300px] lg:w-[500px] lg:grid-cols-[.70fr_.9fr] lg:items-center animate-fade-in dark:bg-[url('/bg-contact-dark.webp')] bg-[url('/bg-contact-light.webp')] bg-no-repeat bg-cover rounded-sm">

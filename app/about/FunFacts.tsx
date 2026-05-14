@@ -1,7 +1,16 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import { IconType } from "react-icons";
 import { FaPaintbrush } from "react-icons/fa6";
 import { GiFullMotorcycleHelmet, GiGamepad, GiTinker } from "react-icons/gi";
+import { motion, useInView } from "motion/react";
+import {
+  staggerContainer,
+  staggerItem,
+} from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
+
 type Fact = {
   title: string;
   desc: string;
@@ -33,31 +42,43 @@ const facts: Fact[] = [
 
 type Props = { title: string; desc: string; icon: IconType; index: number };
 const FactCard = ({ title, desc, icon: Icon, index }: Props) => {
+  const item = useAnimationVariants(staggerItem);
   return (
-    <li
-      className={`flex flex-col gap-3 p-5 font-georgia ${index % 2 !== 0 ? "bg-primary/20 rounded-lg" : "bg-muted/30 rounded-lg"}`}
+    <motion.li
+      variants={item}
+      className={`flex flex-col gap-3 p-5 font-georgia border border-transparent rounded-lg [will-change:transform] ${index % 2 !== 0 ? "bg-primary/20 rounded-lg" : "bg-muted/30 rounded-lg"}`}
+      whileHover={{ y: -4, borderColor: "rgba(62,207,142,0.15)" }}
+      transition={{ duration: 0.2 }}
     >
       <Icon className={"text-primary size-5"} />
       <h3 className={"text-xl text-foreground"}>{title}</h3>
       <p className={"text-muted-foreground text-sm font-courier"}>{desc}</p>
-    </li>
+    </motion.li>
   );
 };
 const FunFacts = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+
   return (
     <section className="relative flex flex-col gap-10 section-padding !pt-10 bg-radial from-[rgba(10,10,15,0.6)]/20 to-darkblue">
-      {/*--------------- badge -------------*/}
       <div className="flex justify-start items-center gap-3  badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
         A bit more about me
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
       </div>
 
-      {/* ------------ more about me ------------- */}
-      <ul className={"flex flex-col md:flex-row mt-5 gap-1"}>
+      <motion.ul
+        ref={ref}
+        className={"flex flex-col md:flex-row mt-5 gap-1"}
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {facts.map((item, index) => (
           <FactCard {...item} index={index} key={index} />
         ))}
-      </ul>
+      </motion.ul>
     </section>
   );
 };

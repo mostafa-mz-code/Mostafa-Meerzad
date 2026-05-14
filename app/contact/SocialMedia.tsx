@@ -1,11 +1,20 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import { IoMdStopwatch } from "react-icons/io";
 import { socialMedia } from "../constants/socialMedia";
 import Link from "next/link";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import { GoArrowUpRight } from "react-icons/go";
+import { motion, useInView } from "motion/react";
+import { staggerContainer, staggerItem } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const SocialMedia = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+  const item = useAnimationVariants(staggerItem);
+
   return (
     <div
       className={
@@ -35,12 +44,21 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      <ul className={"flex flex-col bg-gray-900/20 overflow-hidden gap-2"}>
+      <motion.ul
+        ref={ref}
+        className={"flex flex-col bg-gray-900/20 overflow-hidden gap-2"}
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {socialMedia.map(
           ({ Img, btnLabel, label, href, link, opts, diff }, index) => (
-            <li
+            <motion.li
               key={index}
-              className={`flex items-center justify-between p-5 gap-5  ${index % 2 === 0 ? "bg-gradient-to-r from-primary/20 border-l border-primary/70 rounded-lg" : " bg-gradient-to-l from-gray-800/20 border-r border-gray-800 rounded-lg"}`}
+              variants={item}
+              className={`flex items-center justify-between p-5 gap-5 border border-transparent rounded-lg [will-change:transform] ${index % 2 === 0 ? "bg-gradient-to-r from-primary/20 border-l border-primary/70 rounded-lg" : " bg-gradient-to-l from-gray-800/20 border-r border-gray-800 rounded-lg"}`}
+              whileHover={{ x: 4, borderColor: "rgba(62,207,142,0.2)" }}
+              transition={{ duration: 0.15 }}
             >
               <div className={"flex items-center justify-center gap-3"}>
                 <Img
@@ -52,20 +70,28 @@ const SocialMedia = () => {
                 </div>
               </div>
 
-              <Link
-                href={href}
-                {...opts}
-                className={`flex items-center justify-center gap-1.5  border ${diff ? "border-gray-500/30" : "border-primary/30"}  rounded-sm text-xs py-1.5 px-4 cursor-pointer`}
+              <motion.div
+                className="[will-change:transform]"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
               >
-                {btnLabel}{" "}
-                <GoArrowUpRight
-                  className={`${diff ? "text-muted-foreground/80" : "text-primary/60"}`}
-                />
-              </Link>
-            </li>
+                <Link
+                  href={href}
+                  {...opts}
+                  aria-label={opts.ariaLabel}
+                  className={`flex items-center justify-center gap-1.5  border ${diff ? "border-gray-500/30" : "border-primary/30"}  rounded-sm text-xs py-1.5 px-4 cursor-pointer`}
+                >
+                  {btnLabel}{" "}
+                  <GoArrowUpRight
+                    className={`${diff ? "text-muted-foreground/80" : "text-primary/60"}`}
+                  />
+                </Link>
+              </motion.div>
+            </motion.li>
           ),
         )}
-      </ul>
+      </motion.ul>
     </div>
   );
 };

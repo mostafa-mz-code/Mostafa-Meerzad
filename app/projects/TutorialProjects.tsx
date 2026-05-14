@@ -1,16 +1,25 @@
+"use client";
+
 import { GoPlus } from "react-icons/go";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { motion, useInView } from "motion/react";
+import { fadeUp, staggerContainer } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const TutorialProjects = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+  const fade = useAnimationVariants(fadeUp);
+
   return (
     <section
       className={
         "flex flex-col justify-between items-start relative section-padding gap-5 "
       }
     >
-      {/*--------------- badge -------------*/}
       <div className="flex justify-start items-center gap-3 absolute badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
         Personal projects
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
@@ -18,13 +27,17 @@ const TutorialProjects = () => {
       <p className={"font-courier text-muted-foreground/70 text-sm"}>
         Tutorial-based projects built while mastering my skills.
       </p>
-      {/* ------------- project --------------- */}
-      <div
+      <motion.div
+        ref={ref}
         className={
           "grid lg:grid-cols-3 border border-primary/20 rounded-xl overflow-hidden"
         }
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
       >
-        <div
+        <motion.div
+          variants={fade}
           className={`flex flex-col items-start justify-start gap-5 border border-primary/8 px-7 py-8 w-full bg-gradient-to-bl from-primary/6 to-darkblue `}
         >
           <h3 className={"text-xl font-georgia text-white/80"}>
@@ -71,9 +84,10 @@ const TutorialProjects = () => {
           <em className={"text-xs text-muted-foreground"}>
             Frontend Mentor challenge
           </em>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
+          variants={fade}
           className={`flex flex-col items-start justify-start gap-5 border border-primary/8 px-7 py-8 w-full bg-gradient-to-bl  to-darkblue from-gray-500/10`}
         >
           <h3 className={"text-xl font-georgia text-white/80 "}>
@@ -122,8 +136,9 @@ const TutorialProjects = () => {
           <em className={"text-xs text-muted-foreground"}>
             Tutorial · JavaScript Mastery
           </em>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          variants={fade}
           className={
             "flex flex-col justify-center items-center max-lg:h-64 text-center border border-primary/8 text-muted-foreground bg-radial from-primary/10 to-darkblue"
           }
@@ -134,8 +149,8 @@ const TutorialProjects = () => {
             more on
           </span>
           <span>github.com/mostafa-meerzad</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

@@ -1,15 +1,26 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "motion/react";
+import { scaleIn, staggerContainer } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
+
+import type { Variants } from "framer-motion";
 
 type Props = {
   datetime: string;
   title: string;
   desc: string;
   className?: string;
+  cardVariants: Variants;
 };
-const JourneyCard = ({ datetime, title, desc, className }: Props) => {
+const JourneyCard = ({ datetime, title, desc, className, cardVariants }: Props) => {
   return (
-    <div className={`flex flex-col gap-5 p-5 ${className}`}>
+    <motion.div
+      className={`flex flex-col gap-5 p-5 border border-transparent ${className} [will-change:transform]`}
+      variants={cardVariants}
+      whileHover={{ borderColor: "rgba(62,207,142,0.3)", y: -2 }}
+      transition={{ duration: 0.2 }}
+    >
       <span
         className={
           "  w-fit  rounded-full text-[.7rem]  text-primary font-courier -mb-2"
@@ -19,7 +30,7 @@ const JourneyCard = ({ datetime, title, desc, className }: Props) => {
       </span>
       <h2 className={"text-2xl font-georgia"}>{title}</h2>
       <p className={"text-muted-foreground/70  md:w-4/5"}>{desc}</p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -32,6 +43,11 @@ const Journey = () => {
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+  const cardVariants = useAnimationVariants(scaleIn);
 
   const journey = [
     {
@@ -68,7 +84,13 @@ const Journey = () => {
       </div>
 
       {/* ----------- parts of journey -------------- */}
-      <div className={"grid lg:grid-cols-2 gap-5 px-5"}>
+      <motion.div
+        ref={ref}
+        className={"grid lg:grid-cols-2 gap-5 px-5"}
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {journey.map((item, index) => {
           const position = index + 1;
           const isSpecial = isLargeScreen
@@ -79,11 +101,12 @@ const Journey = () => {
             <JourneyCard
               {...item}
               key={item.title}
+              cardVariants={cardVariants}
               className={`${isSpecial ? "border-l border-primary/70 rounded-tl-md rounded-bl-md bg-gradient-to-r to-[rgba(10,10,15,0.6)]/20 from-primary/10" : ""}`}
             />
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 };

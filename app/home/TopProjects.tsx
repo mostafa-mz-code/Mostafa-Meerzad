@@ -1,15 +1,12 @@
 "use client";
-import ProjectsList from "@/app/projects/ProductionWork";
-import { motion } from "framer-motion";
+
+import { motion, useInView } from "motion/react";
 import Link from "next/link";
-import {
-  FaArrowRight,
-  FaLocationArrow,
-  FaLongArrowAltRight,
-} from "react-icons/fa";
-import React from "react";
+import { FaArrowRight, FaLocationArrow } from "react-icons/fa";
+import React, { useRef } from "react";
 import TechStacks from "../_components/TechStacks";
-import { CiLocationArrow1 } from "react-icons/ci";
+import { staggerContainer, staggerItem } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 type Project = {
   title: string;
@@ -20,51 +17,69 @@ type Project = {
   repo: { href: string; title: string };
 };
 const Project = ({ title, subtitle, desc, techs, live, repo }: Project) => {
+  const item = useAnimationVariants(staggerItem);
   return (
-    <div className=" flex flex-col gap-4 w-full  md:max-w-xs lg:max-w-sm xl:max-w-md">
-      {/*------- badge -----------*/}
+    <motion.div
+      variants={item}
+      className=" flex flex-col gap-4 w-full  md:max-w-xs lg:max-w-sm xl:max-w-md [will-change:transform] rounded-lg border border-transparent p-1"
+    >
       <div className=" text-xs text-muted-foreground/50 font-courier">
         {subtitle}
       </div>
-      {/*------- title and description ----------*/}
       <div className="text-xl font-georgia text-[#f0eee8]">{title}</div>
       <div className="text-muted-foreground text-sm font-courier -mt-1">
         {desc}
       </div>
 
-      {/*------------- tech stacks -----------*/}
       <ul className={"flex flex-wrap items-center gap-1.5 mt-3"}>
         {techs.map((tech: string, index: number) => (
           <TechStacks key={index} tech={tech} />
         ))}
       </ul>
 
-      {/* ------------ CTA buttons -------------*/}
       <div className="flex flex-row justify-star gap-16">
         {live.href && (
-          <Link
-            href={live.href}
-            className="flex justify-start items-center gap-3 text-primary/90 font-georgia text-sm  cursor-pointer"
-            target="_blank"
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
           >
-            {live.title} <FaLocationArrow className={"size-3"} />
-          </Link>
+            <Link
+              href={live.href}
+              className="flex justify-start items-center gap-3 text-primary/90 font-georgia text-sm  cursor-pointer"
+              target="_blank"
+            >
+              {live.title} <FaLocationArrow className={"size-3"} />
+            </Link>
+          </motion.div>
         )}
         {repo.href && (
-          <Link
-            href={repo.href}
-            className="flex justify-start items-center gap-3 text-primary/90 font-georgia text-sm cursor-pointer"
-            target={"_blank"}
+          <motion.div
+            className="[will-change:transform]"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
           >
-            {repo.title} <FaArrowRight />
-          </Link>
+            <Link
+              href={repo.href}
+              className="flex justify-start items-center gap-3 text-primary/90 font-georgia text-sm cursor-pointer"
+              target={"_blank"}
+            >
+              {repo.title} <FaArrowRight />
+            </Link>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const TopProjects = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const stagger = useAnimationVariants(staggerContainer);
+
   const projects: Project[] = [
     {
       title: "SheReads",
@@ -97,9 +112,17 @@ const TopProjects = () => {
         More projects
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
       </div>
-      {projects.map((project: Project) => (
-        <Project {...project} key={project.title} />
-      ))}
+      <motion.div
+        ref={ref}
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="flex flex-col flex-wrap md:flex-row gap-y-16 md:gap-14 w-full justify-between"
+      >
+        {projects.map((project: Project) => (
+          <Project {...project} key={project.title} />
+        ))}
+      </motion.div>
     </section>
   );
 };

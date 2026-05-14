@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -5,15 +7,22 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import mobile from "../assets/chatty-mobile.webp";
 import desktop from "../assets/chatty-desktop.webp";
 import { Card, CardContent } from "@/components/ui/card";
 import TechStacks from "../_components/TechStacks";
+import { motion, useInView } from "motion/react";
+import { scaleIn } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 const FeaturedProject = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const scale = useAnimationVariants(scaleIn);
+
   const techs = [
     "Next.js",
     "TypeScript",
@@ -27,14 +36,23 @@ const FeaturedProject = () => {
         "grid xl:grid-cols-2   section-padding bg-gradient-to-r from-[rgba(10,10,15,0.6)]/20 to-[rgba(10,10,15,0.9)] relative "
       }
     >
-      {/*--------------- badge -------------*/}
       <div className="flex justify-center items-center gap-3 absolute badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
         featured work
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
       </div>
 
-      {/*---------------- featured work  ----------- */}
-      <div className={"flex flex-col gap-8 "}>
+      <motion.div
+        ref={ref}
+        variants={scale}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className={"flex flex-col gap-8 [will-change:transform]"}
+        whileHover={{
+          y: -4,
+          boxShadow: "0 20px 60px rgba(62,207,142,0.06)",
+        }}
+        transition={{ duration: 0.2 }}
+      >
         <div
           className={
             "bg-primary/15 text-primary border border-primary/40 w-fit px-4 py-0.5 text-xs rounded-full font-courier"
@@ -52,14 +70,12 @@ const FeaturedProject = () => {
           Manages sales, inventory, suppliers, customers, deliveries, and
           reporting across multiple branches. Currently live across 3 branches.
         </p>
-        {/*---------- tech stacks ---------------*/}
         <ul className="flex justify-start flex-wrap gap-1.5">
           {techs.map((tech, index) => (
             <TechStacks tech={tech} key={index} />
           ))}
         </ul>
 
-        {/*----------- CTA buttons ---------*/}
         <div className="flex gap-8 md:gap-4  ">
           <Button
             variant={"outline"}
@@ -69,13 +85,14 @@ const FeaturedProject = () => {
             Internal App
           </Button>
         </div>
-      </div>
+      </motion.div>
 
-      {/*--------- screenshots carousel --------------*/}
-      <div
+      <motion.div
         className={
-          "flex justify-center items-center max-xl:mt-14  sm:px-5 md:px-20  "
+          "flex justify-center items-center max-xl:mt-14  sm:px-5 md:px-20 [will-change:transform]"
         }
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
         <Carousel className="w-full  ">
           <CarouselContent className="-ml-1 ">
@@ -107,7 +124,7 @@ const FeaturedProject = () => {
           <CarouselPrevious className={"max-md:hidden text-primary"} />
           <CarouselNext className={"max-md:hidden text-primary"} />
         </Carousel>
-      </div>
+      </motion.div>
     </section>
   );
 };
