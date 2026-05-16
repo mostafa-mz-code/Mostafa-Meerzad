@@ -5,10 +5,7 @@ import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { motion, useInView } from "motion/react";
 import type { Variants } from "framer-motion";
-import {
-  staggerContainer,
-  staggerItem,
-} from "@/lib/motion-variants";
+import { staggerContainer, staggerItem } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 type Props = ProjectType & { index: number; itemVariants: Variants };
@@ -38,9 +35,14 @@ const Project = ({
   return (
     <motion.li
       variants={itemVariants}
-      className={`flex flex-col gap-5 px-5 md:px-7 py-8 w-full border border-transparent rounded-lg [will-change:transform] ${isLast && "col-span-2"} ${isSpecial ? "border-l border-primary/70 rounded-tl-lg rounded-bl-lg bg-gradient-to-r to-[rgba(10,10,15,0.6)]/20 from-primary/10" : "max-lg:border-r lg:border-l bg-gradient-to-l border-gray-500/60 rounded-tr-lg lg:rounded-tl-lg rounded-br-lg lg:rounded-bl-lg lg:bg-gradient-to-r to-[rgba(10,10,15,0.6)]/10 from-gray-500/8"}`}
-      whileHover={{ y: -4, borderColor: "rgba(62,207,142,0.15)" }}
+      className={`flex flex-col gap-5 px-5 md:px-7 py-8 w-full borderr border-transparent rounded-lg [will-change:transform] ${isLast && "col-span-2"} ${isSpecial ? "border-lr border-primary/70 rounded-tl-lg rounded-bl-lg bg-gradient-to-r to-[rgba(10,10,15,0.6)]/20 from-primary/10" : "max-lg:border-r lg:border-lr bg-gradient-to-l border-gray-500/60 rounded-tr-lg lg:rounded-tl-lg rounded-br-lg lg:rounded-bl-lg lg:bg-gradient-to-r to-[rgba(10,10,15,0.6)]/10 from-gray-500/8"}`}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
+      style={
+        isSpecial
+          ? { borderInlineStart: "1px solid #3ecf8e" }
+          : { borderInlineStart: "1px solid #6a7282" }
+      }
     >
       <span className={"text-sm text-muted-foreground/60 font-courier"}>
         {type}
@@ -57,7 +59,7 @@ const Project = ({
           <motion.li
             key={i}
             className={
-              "border border-muted px-3 py-0.5 rounded-full bg-muted/30 text-[.65em] font-courier text-muted-foreground/70 [will-change:transform]"
+              "border border-muted px-3 py-0.5 rounded-full bg-muted/30 text-[.65em] font-courier text-muted-foreground/70 [will-change:transform] cursor-default"
             }
             whileHover={{
               borderColor: "rgba(62,207,142,0.3)",

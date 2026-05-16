@@ -1,19 +1,15 @@
 "use client";
 
 import { productionProjects, ProductionType } from "@/app/constants/projects";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { staggerContainer, staggerItem } from "@/lib/motion-variants";
+import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import { FaArrowTurnUp } from "react-icons/fa6";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import {
-  staggerContainer,
-  staggerItem,
-} from "@/lib/motion-variants";
-import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 type Props = ProductionType & { index: number };
 const Project = ({
@@ -48,7 +44,7 @@ const Project = ({
               {badges.map((item, index) => (
                 <li
                   key={index}
-                  className={` px-4 py-1 border rounded-full text-muted-foreground text-[.7rem] font-courier w-fit ${index === 0 ? "bg-primary/20 border-primary/40" : "bg-muted/70 border-muted-foreground/20"}`}
+                  className={` px-4 py-1 border rounded-full text-muted-foreground text-[.7rem] font-courier w-fit ${index === 0 ? "bg-primary/20 border-primary/40" : "bg-muted/70 border-muted-foreground/20"} cursor-default`}
                 >
                   {item}
                 </li>
@@ -67,16 +63,20 @@ const Project = ({
               {description}
             </p>
             <ul className="flex gap-2 flex-wrap">
-              {technologies.map((tech) => (
-                <li key={tech}>
-                  <Badge
-                    className={
-                      "text-muted-foreground/60 bg-muted/30 !border border-gray-600/30 px-3 py-0.5 rounded-full text-[0.7rem] [will-change:transform]"
-                    }
-                  >
-                    {tech}
-                  </Badge>
-                </li>
+              {technologies.map((tech, i) => (
+                <motion.li
+                  key={i}
+                  className={
+                    "border border-muted px-3 py-0.5 rounded-full bg-muted/30 text-[.65em] font-courier text-muted-foreground/70 [will-change:transform] cursor-default"
+                  }
+                  whileHover={{
+                    borderColor: "rgba(62,207,142,0.3)",
+                    color: "rgba(255,255,255,0.7)",
+                  }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {tech}
+                </motion.li>
               ))}
             </ul>
             <div className="flex  gap-10 w-full justify-start">

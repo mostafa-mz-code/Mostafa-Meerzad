@@ -89,14 +89,14 @@ const Hero = () => {
             >
               <Button variant={"outline"}>Download Resume</Button>
             </motion.div>
-            <motion.div
+            {/* <motion.div
               className="[will-change:transform]"
               whileHover={{ scale: 1.03, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.15 }}
             >
               <Button variant={"outline"}>Ask My AI *</Button>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       </motion.div>

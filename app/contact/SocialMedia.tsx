@@ -56,8 +56,8 @@ const SocialMedia = () => {
             <motion.li
               key={index}
               variants={item}
-              className={`flex items-center justify-between p-5 gap-5 border border-transparent rounded-lg [will-change:transform] ${index % 2 === 0 ? "bg-gradient-to-r from-primary/20 border-l border-primary/70 rounded-lg" : " bg-gradient-to-l from-gray-800/20 border-r border-gray-800 rounded-lg"}`}
-              whileHover={{ x: 4, borderColor: "rgba(62,207,142,0.2)" }}
+              className={`flex items-center justify-between p-5 gap-5  rounded-lg [will-change:transform] ${index % 2 === 0 ? "bg-gradient-to-r from-primary/20 border-l border-primary/70 rounded-lg" : " bg-gradient-to-l from-gray-800/20 border-r border-gray-800 rounded-lg"}`}
+              whileHover={{ x: 4 }}
               transition={{ duration: 0.15 }}
             >
               <div className={"flex items-center justify-center gap-3"}>
@@ -78,8 +78,9 @@ const SocialMedia = () => {
               >
                 <Link
                   href={href}
-                  {...opts}
                   aria-label={opts.ariaLabel}
+                  target={opts.target}
+                  rel={opts.rel}
                   className={`flex items-center justify-center gap-1.5  border ${diff ? "border-gray-500/30" : "border-primary/30"}  rounded-sm text-xs py-1.5 px-4 cursor-pointer`}
                 >
                   {btnLabel}{" "}

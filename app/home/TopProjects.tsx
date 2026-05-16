@@ -41,7 +41,10 @@ const Project = ({ title, subtitle, desc, techs, live, repo }: Project) => {
         {live.href && (
           <motion.div
             className="[will-change:transform]"
-            whileHover={{ scale: 1.02, y: -1 }}
+            whileHover={{
+              scale: 1.02,
+              y: -1,
+            }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.15 }}
           >

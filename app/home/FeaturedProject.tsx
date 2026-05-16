@@ -47,10 +47,6 @@ const FeaturedProject = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         className={"flex flex-col gap-8 [will-change:transform]"}
-        whileHover={{
-          y: -4,
-          boxShadow: "0 20px 60px rgba(62,207,142,0.06)",
-        }}
         transition={{ duration: 0.2 }}
       >
         <div

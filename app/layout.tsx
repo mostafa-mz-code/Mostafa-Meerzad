@@ -93,7 +93,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </LayoutWrapper>
-        <MoziWidget />
+        {/* <MoziWidget /> */}
       </body>
     </html>
   );

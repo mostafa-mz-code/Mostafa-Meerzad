@@ -4,7 +4,7 @@ import { motion, useInView } from "motion/react";
 import { scaleIn, staggerContainer } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
-import type { Variants } from "framer-motion";
+import type { MotionStyle, Variants } from "framer-motion";
 
 type Props = {
   datetime: string;
@@ -12,14 +12,23 @@ type Props = {
   desc: string;
   className?: string;
   cardVariants: Variants;
+  style?: MotionStyle;
 };
-const JourneyCard = ({ datetime, title, desc, className, cardVariants }: Props) => {
+const JourneyCard = ({
+  datetime,
+  title,
+  desc,
+  className,
+  cardVariants,
+  style,
+}: Props) => {
   return (
     <motion.div
-      className={`flex flex-col gap-5 p-5 border border-transparent ${className} [will-change:transform]`}
+      className={`flex flex-col gap-5 p-5  border-transparent ${className} [will-change:transform]`}
       variants={cardVariants}
-      whileHover={{ borderColor: "rgba(62,207,142,0.3)", y: -2 }}
+      whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
+      style={style}
     >
       <span
         className={
@@ -103,6 +112,9 @@ const Journey = () => {
               key={item.title}
               cardVariants={cardVariants}
               className={`${isSpecial ? "border-l border-primary/70 rounded-tl-md rounded-bl-md bg-gradient-to-r to-[rgba(10,10,15,0.6)]/20 from-primary/10" : ""}`}
+              style={
+                isSpecial ? { borderInlineStart: "1px solid #3ecf8e" } : {}
+              }
             />
           );
         })}
