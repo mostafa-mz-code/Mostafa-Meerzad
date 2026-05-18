@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { FaArrowUp, FaLocationArrow } from "react-icons/fa";
-import { motion, useInView } from "motion/react";
+import MoziModal from "@/components/mozi/MoziModal";
+import StarBorder from "@/components/StarBorder";
 import {
   slideInLeft,
   slideInRight,
   staggerContainer,
 } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { motion, useInView } from "motion/react";
+import { useRef, useState } from "react";
+import { FaArrowUp, FaLocationArrow } from "react-icons/fa";
 
 const AiChat = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const stagger = useAnimationVariants(staggerContainer);
@@ -19,6 +21,10 @@ const AiChat = () => {
   const aiBubble = useAnimationVariants(slideInLeft);
 
   const messages = [
+    {
+      msg: "Hey, I'm Mozi ✦ Ask me anything about Mostafa's work, stack, experience, or availability.",
+      from: "system",
+    },
     { msg: "Does he know PostgreSQL?", from: "user" },
     {
       msg: "Yes — Mostafa uses PostgreSQL with Prisma ORM and has shipped it in production at Webistan.cloud.",
@@ -65,12 +71,22 @@ const AiChat = () => {
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.15 }}
           >
-            <Button
-              className={"!border-[#378add] !px-10 mt-10 "}
-              variant={"outline"}
+            <StarBorder
+              as="button"
+              className="custom-class"
+              color="cyan"
+              speed="5s"
+              onClick={() => setIsOpen((prev) => !prev)}
+              style={{}}
+              
             >
-              Start Chat <FaLocationArrow className={"size-3 text-[#378add]"} />
-            </Button>
+              <div
+                className={"flex items-center gap-2 text-[#378add] text-sm "}
+              >
+                Chat with Mozi{" "}
+                <FaLocationArrow className={"size-3 text-[#378add]"} />
+              </div>
+            </StarBorder>
           </motion.div>
         </div>
 
@@ -86,7 +102,7 @@ const AiChat = () => {
               <motion.li
                 key={index}
                 variants={from === "user" ? userBubble : aiBubble}
-                className={`text-xs border-[0.5px] w-fit max-w-sm py-2 px-3 rounded-sm font-courier ${from === "user" ? "bg-lightblue/20 text-[#378add] text-right self-end" : " border-gray-600 bg-gray-800 text-gray-300/70 self-start"}`}
+                className={`text-xs border-[0.5px] w-fit max-w-sm py-2 px-3 rounded-sm font-courier ${from === "user" ? "bg-[#121d1c] text-primary/80 text-right self-end border-primary/60" : " border-gray-800 bg-[#13131f] text-gray-300/80 self-start"}`}
               >
                 {msg}
               </motion.li>
@@ -95,28 +111,24 @@ const AiChat = () => {
 
           <hr className={"my-5"} />
 
-          <div
-            className={
-              "flex items-center gap-4 border rounded-full py-2 px-3 bg-muted-foreground/10 "
-            }
-          >
-            <p
-              className={
-                "text-sm font-georgia text-muted-foreground w-full mx-4"
-              }
-            >
-              Ask me anything
-            </p>
-            <div
-              className={
-                "border border-lightblue bg-lightblue w-fit p-2 rounded-full"
-              }
+          <div className="flex gap-2 ">
+            <input
+              type="text"
+              placeholder="Ask me anything about Mostafa..."
+              className="flex-1 bg-[#0e0e18] border border-white/[0.08] rounded-md px-4 py-2.5 text-[13px] font-mono text-white/70 placeholder-white/20 outline-none focus:border-[#3ecf8e]/30 transition-colors disabled:opacity-50"
+            />
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.15 }}
+              className="px-4 py-2.5 rounded-md bg-[#3ecf8e]/70 text-[#0a0a0f] font-mono text-[12px] font-bold disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <FaArrowUp className={"size-3"} />
-            </div>
+            </motion.button>
           </div>
         </motion.div>
       </div>
+      <MoziModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </section>
   );
 };

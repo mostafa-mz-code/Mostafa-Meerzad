@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
 import { useVisitorId } from "@/hooks/use-visitor-id";
-import MoziMessage from "./MoziMessage";
+import { useEffect, useRef, useState } from "react";
 import MoziInput from "./MoziInput";
+import MoziMessage from "./MoziMessage";
 
 interface Message {
   id: string;
@@ -98,16 +98,16 @@ export default function MoziChat() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10">
+    <div className="flex flex-col h-full ">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10 custom-scrollbar">
         {messages.map((msg) => (
           <MoziMessage key={msg.id} role={msg.role} content={msg.content} />
         ))}
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-[#13131f] border border-white/[0.06] px-4 py-3 rounded-lg">
-              <div className="flex gap-1">
+            <div className="bg-[#13131f] border border-white/[0.06] px-4 py-3 rounded-lg ">
+              <div className="flex gap-1 ">
                 {[0, 1, 2].map((i) => (
                   <span
                     key={i}

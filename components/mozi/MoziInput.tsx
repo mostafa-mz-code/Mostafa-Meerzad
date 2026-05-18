@@ -1,6 +1,7 @@
 "use client";
 import { useState, KeyboardEvent } from "react";
 import { motion } from "motion/react";
+import { FaArrowUp } from "react-icons/fa6";
 
 interface MoziInputProps {
   onSend: (message: string) => void;
@@ -43,7 +44,7 @@ export default function MoziInput({ onSend, isLoading }: MoziInputProps) {
         transition={{ duration: 0.15 }}
         className="px-4 py-2.5 rounded-md bg-[#3ecf8e] text-[#0a0a0f] font-mono text-[12px] font-bold disabled:opacity-30 disabled:cursor-not-allowed"
       >
-        {isLoading ? "..." : "↑"}
+        {isLoading ? "..." : <FaArrowUp className={"size-3"} />}
       </motion.button>
     </div>
   );

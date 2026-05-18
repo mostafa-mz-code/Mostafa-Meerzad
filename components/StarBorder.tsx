@@ -19,16 +19,15 @@ const StarBorder = <T extends React.ElementType = 'button'>({
   children,
   ...rest
 }: StarBorderProps<T>) => {
-  const Component = as || "button";
-  const domRest = rest as React.HTMLAttributes<HTMLElement>;
+  const Component = as || 'button';
 
   return (
     <Component
       className={`star-border-container ${className}`}
-      {...domRest}
+      {...(rest as any)}
       style={{
         padding: `${thickness}px 0`,
-        ...domRest.style,
+        ...(rest as any).style
       }}
     >
       <div

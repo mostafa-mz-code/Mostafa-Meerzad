@@ -11,6 +11,8 @@ import {
   staggerItem,
 } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { MoziModal, MoziWidget } from "@/components/mozi";
+import MoziInHomepage from "@/components/mozi/MoziInHomepage";
 
 const Hero = () => {
   const stagger = useAnimationVariants(staggerContainer);
@@ -72,31 +74,27 @@ const Hero = () => {
         </motion.div>
 
         <motion.div variants={item} className="max-md:hidden w-full">
-          <div className="flex flex-wrap gap-4">
-            <motion.div
-              className="[will-change:transform]"
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Button variant={"default"}>See My Work</Button>
-            </motion.div>
-            <motion.div
-              className="[will-change:transform]"
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Button variant={"outline"}>Download Resume</Button>
-            </motion.div>
-            {/* <motion.div
-              className="[will-change:transform]"
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.15 }}
-            >
-              <Button variant={"outline"}>Ask My AI *</Button>
-            </motion.div> */}
+          <div className="flex flex-wrap lg:flex-row items-center justify-start gap-5">
+            <div className={"flex justify-center items-center gap-5"}>
+              <motion.div
+                className="[will-change:transform]"
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Button variant={"default"}>See My Work</Button>
+              </motion.div>
+              <motion.div
+                className="[will-change:transform]"
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Button variant={"outline"}>Download Resume</Button>
+              </motion.div>
+            </div>
+
+            <MoziInHomepage />
           </div>
         </motion.div>
       </motion.div>
@@ -122,31 +120,26 @@ const Hero = () => {
         animate="visible"
         className="md:hidden w-full flex justify-center"
       >
-        <div className="flex flex-wrap max-md:justify-center gap-4">
-          <motion.div
-            className="[will-change:transform]"
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.15 }}
-          >
-            <Button variant={"default"}>See My Work</Button>
-          </motion.div>
-          <motion.div
-            className="[will-change:transform]"
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.15 }}
-          >
-            <Button variant={"outline"}>Download Resume</Button>
-          </motion.div>
-          <motion.div
-            className="[will-change:transform]"
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.15 }}
-          >
-            <Button variant={"outline"}>Ask My AI *</Button>
-          </motion.div>
+        <div className="flex flex-col items-center justify-center gap-10">
+          <div className={"flex justify-center items-center gap-10"}>
+            <motion.div
+              className="[will-change:transform]"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Button variant={"default"}>See My Work</Button>
+            </motion.div>
+            <motion.div
+              className="[will-change:transform]"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Button variant={"outline"}>Download Resume</Button>
+            </motion.div>
+          </div>
+          <MoziInHomepage />
         </div>
       </motion.div>
     </div>

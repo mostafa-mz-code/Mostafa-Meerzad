@@ -1,7 +1,7 @@
 .star-border-container {
   display: inline-block;
   position: relative;
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -12,7 +12,7 @@
   opacity: 0.7;
   bottom: -11px;
   right: -250%;
-  border-radius: 50%;
+  border-radius: 30%;
   animation: star-movement-bottom linear infinite alternate;
   z-index: 0;
 }
@@ -24,20 +24,20 @@
   height: 50%;
   top: -10px;
   left: -250%;
-  border-radius: 50%;
+  border-radius: 30%;
   animation: star-movement-top linear infinite alternate;
   z-index: 0;
 }
 
 .inner-content {
   position: relative;
-  background: linear-gradient(to bottom, #120F17, #111);
+  background: linear-gradient(to bottom, #120f17, #111);
   border: 1px solid #222;
   color: white;
   font-size: 16px;
   text-align: center;
-  padding: 12px 20px;
-  border-radius: 20px;
+  padding: 10px 26px;
+  border-radius: 10px;
   z-index: 1;
 }
 
