@@ -5,6 +5,7 @@ import { scaleIn, staggerContainer } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
 
 import type { MotionStyle, Variants } from "framer-motion";
+import { journey } from "../constants/journey";
 
 type Props = {
   datetime: string;
@@ -58,28 +59,6 @@ const Journey = () => {
   const stagger = useAnimationVariants(staggerContainer);
   const cardVariants = useAnimationVariants(scaleIn);
 
-  const journey = [
-    {
-      datetime: "2019",
-      title: "Where it started",
-      desc: "Accepted to Kabul University for software engineering. First real exposure to programming — realized this was exactly what I wanted to do.",
-    },
-    {
-      datetime: "2020 – 2021",
-      title: "The pivot",
-      desc: "Circumstances made continuing university impossible. Made a decision: if school wasn't an option, I'd build my own curriculum. Opened a browser and never looked back.",
-    },
-    {
-      datetime: "2021 – 2023",
-      title: "Self-built",
-      desc: "FreeCodeCamp, YouTube, GitHub — project after project. Earned four certifications. Built 160+ repos. Landed a Coding Samurai internship entirely on the strength of what I'd shipped. No degree. Just code.",
-    },
-    {
-      datetime: "2024 – Present",
-      title: "Professional",
-      desc: "Joined Webistan.cloud as a Full Stack Developer. Shipped two production applications for real clients. Now looking for a bigger challenge — remote or in Kabul.",
-    },
-  ];
   return (
     <section
       className={
