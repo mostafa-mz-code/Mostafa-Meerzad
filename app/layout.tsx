@@ -8,6 +8,7 @@ import LayoutWrapper from "./LayoutWrapper";
 import Navbar from "./_components/Navbar";
 import ToasterComponent from "./_components/ToasterComponent";
 import MoziWidget from "@/components/mozi/MoziWidget";
+import { NotFoundProvider } from "./context/NotFoundContext";
 
 export const metadata = {
   title: "Mostafa Meerzad | Full Stack Developer",
@@ -81,6 +82,7 @@ export default function RootLayout({
           }}
         />
         <ToasterComponent />
+        <NotFoundProvider>
         <LayoutWrapper>
           <ThemeProvider
             attribute="class"
@@ -93,6 +95,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </LayoutWrapper>
+        </NotFoundProvider>
         <MoziWidget />
       </body>
     </html>
