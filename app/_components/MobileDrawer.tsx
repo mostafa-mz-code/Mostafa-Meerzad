@@ -8,10 +8,9 @@ import {
   Drawer,
   DrawerContent,
   DrawerTitle,
-  DrawerTrigger
+  DrawerTrigger,
 } from "@/components/ui/drawer";
 import me from "../assets/me-dark.webp";
-import ModeToggle from "./ModeToggle";
 import NavItem from "./NavItem";
 
 const MobileDrawer = () => {
@@ -41,7 +40,7 @@ const MobileDrawer = () => {
               </div>
             </div>
           </div>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </div>
         {/* Navigation Items */}
         <nav className="space-y-2 mt-5 ml-2">
@@ -70,7 +69,5 @@ const MobileDrawer = () => {
     </Drawer>
   );
 };
-
-
 
 export default MobileDrawer;

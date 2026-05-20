@@ -16,7 +16,7 @@ const Navbar = () => {
     >
       <Name />
       <div className="md:flex gap-3 items-center hidden">
-        <Navigation /> <ModeToggle />
+        <Navigation />
       </div>
       <MobileDrawer />
     </motion.nav>

@@ -13,7 +13,7 @@ export default function NavMenuTriggerLink({
   return (
     <motion.span
       className="inline-flex [will-change:transform]"
-      whileHover={{ color: "#3ecf8e" }}
+      whileHover={{ color: "#3ecf8e", scale: 1.08 }}
       transition={{ duration: 0.15 }}
     >
       <Link href={href} className="[color:inherit] no-underline">

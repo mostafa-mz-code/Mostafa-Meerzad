@@ -1,11 +1,8 @@
 import {
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import NavMenuTriggerLink from "./NavMenuTriggerLink";
-import { contacts } from "../constants/contacts";
-import ContactLink from "./ContactLink";
 
 const ContactsNav = () => {
   return (
@@ -13,13 +10,6 @@ const ContactsNav = () => {
       <NavigationMenuTrigger>
         <NavMenuTriggerLink href="/contact">Contact</NavMenuTriggerLink>
       </NavigationMenuTrigger>
-      <NavigationMenuContent >
-        <ul className="grid w-[250px] gap-1 animate-fade-in dark:bg-[url('/bg-home-dark.webp')] bg-[url('/bg-home-light.webp')] bg-no-repeat bg-cover rounded-sm">
-          {contacts.map((prop) => {
-            return <ContactLink {...prop} key={prop.label} />;
-          })}
-        </ul>
-      </NavigationMenuContent>
     </NavigationMenuItem>
   );
 };
