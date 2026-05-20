@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import MobileDrawer from "./MobileDrawer";
-import ModeToggle from "./ModeToggle";
 import Name from "./Name";
 import Navigation from "./Navigation";
 

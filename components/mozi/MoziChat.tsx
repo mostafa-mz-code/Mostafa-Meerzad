@@ -34,7 +34,7 @@ export default function MoziChat() {
         if (data.messages && data.messages.length > 0) {
           setMessages([
             GREETING,
-            ...data.messages.map((m: any) => ({
+            ...data.messages.map((m) => ({
               id: m.id,
               role: m.role,
               content: m.content,
@@ -43,6 +43,7 @@ export default function MoziChat() {
         }
       } catch (e) {
         // Silently fail — history is a nice-to-have
+        console.log(e);
       } finally {
         setHistoryLoaded(true);
       }
