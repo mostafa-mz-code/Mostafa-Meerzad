@@ -21,7 +21,7 @@ const TutorialProjects = () => {
       }
     >
       <div className="flex justify-start items-center gap-3 absolute badge-position font-courier tracking-wide text-xs text-muted-foreground/70 uppercase">
-        Personal projects
+        Tutorial projects
         <div className={"w-14 h-[1px] bg-muted-foreground/30"} />
       </div>
       <p className={"font-courier text-muted-foreground/70 text-sm"}>
@@ -48,19 +48,6 @@ const TutorialProjects = () => {
             Tailwind CSS.
           </p>
 
-          {/* <ul className={"flex flex-wrap gap-3"}>
-            {["React.js", "Tailwindcss", "Vite"].map((tech, i) => (
-              <li
-                key={i}
-                className={
-                  "border border-muted px-3 py-0.5 rounded-full bg-muted/30 text-[.6rem] font-courier text-muted-foreground/40 "
-                }
-              >
-                {tech}
-              </li>
-            ))}
-          </ul> */}
-
           <ul className={"flex flex-wrap md:flex-row gap-3"}>
             {["React.js", "Tailwindcss", "Vite"].map((tech, i) => (
               <motion.li
@@ -79,26 +66,6 @@ const TutorialProjects = () => {
             ))}
           </ul>
 
-          {/* <div className={"flex flex-row gap-5 mt-2"}>
-            <Link
-              href={"https://github.com/mostafa-meerzad/nike.git"}
-              rel={"noopener noreferrer"}
-              className={
-                "border border-muted-foreground/30 px-4 py-1 rounded-sm bg-muted/40 font-courier text-xs text-muted-foreground/60"
-              }
-            >
-              GitHub
-            </Link>
-            <Link
-              href={"https://serene-biscotti-6c2764.netlify.app/"}
-              rel={"noopener noreferrer"}
-              className={
-                "flex items-center justify-center gap-2 border border-muted-foreground/30 px-4 py-1 rounded-sm bg-muted/40 font-courier text-xs text-muted-foreground/60"
-              }
-            >
-              Live Demo <MdOutlineArrowOutward />
-            </Link>
-          </div> */}
           <div className={"flex flex-row gap-5 mt-2"}>
             <motion.div
               className="[will-change:transform]"
@@ -134,7 +101,7 @@ const TutorialProjects = () => {
             </motion.div>
           </div>
           <em className={"text-xs text-muted-foreground"}>
-            Frontend Mentor challenge
+            Tutorial · JavaScript Mastery
           </em>
         </motion.div>
 
@@ -150,18 +117,6 @@ const TutorialProjects = () => {
             App Router, Tailwind CSS, and TypeScript.
           </p>
 
-          {/* <ul className={"flex flex-wrap gap-3"}>
-            {["Next.js", "Tailwindcss", "Framer Motion"].map((tech, i) => (
-              <li
-                key={i}
-                className={
-                  "border border-muted px-3 py-0.5 rounded-full bg-muted/30 text-[0.6rem] font-courier text-muted-foreground/40"
-                }
-              >
-                {tech}
-              </li>
-            ))}
-          </ul> */}
           <ul className={"flex flex-wrap md:flex-row gap-3"}>
             {["Next.js", "Tailwindcss", "Framer Motion"].map((tech, i) => (
               <motion.li
@@ -179,29 +134,7 @@ const TutorialProjects = () => {
               </motion.li>
             ))}
           </ul>
-          {/* 
-          <div className={"flex flex-row gap-5 mt-2"}>
-            <Link
-              href={
-                "https://github.com/mostafa-meerzad/space-tourism-next.js.git"
-              }
-              rel={"noopener noreferrer"}
-              className={
-                "border border-muted-foreground/30 px-4 py-1 rounded-sm bg-muted/40 font-courier text-xs text-muted-foreground/60"
-              }
-            >
-              GitHub
-            </Link>
-            <Link
-              href={"https://space-tourism-mocha-three.vercel.app/"}
-              rel={"noopener noreferrer"}
-              className={
-                "flex items-center justify-center gap-2 border border-muted-foreground/30 px-4 py-1 rounded-sm bg-muted/40 font-courier text-xs text-muted-foreground/60"
-              }
-            >
-              Live Demo <MdOutlineArrowOutward />
-            </Link>
-          </div> */}
+
           <div className={"flex flex-row gap-5 mt-2"}>
             <motion.div
               whileHover={{ scale: 1.04 }}
@@ -238,12 +171,13 @@ const TutorialProjects = () => {
             </motion.div>
           </div>
           <em className={"text-xs text-muted-foreground"}>
-            Tutorial · JavaScript Mastery
+            Frontend Mentor challenge
           </em>
         </motion.div>
 
         <motion.a
-          href={"https://github.com"}
+          href={"https://github.com/mostafa-meerzad"}
+          target={"_blank"}
           variants={fade}
           className={
             "flex flex-col justify-center items-center max-lg:h-64 text-center border border-primary/8 text-muted-foreground bg-radial from-primary/10 to-darkblue group"

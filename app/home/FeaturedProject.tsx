@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -7,16 +9,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import React, { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import mobile from "../assets/chatty-mobile.webp";
-import desktop from "../assets/chatty-desktop.webp";
-import { Card, CardContent } from "@/components/ui/card";
-import TechStacks from "../_components/TechStacks";
-import { motion, useInView } from "motion/react";
 import { scaleIn } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { motion, useInView } from "motion/react";
+import Image from "next/image";
+import { useRef } from "react";
+import TechStacks from "../_components/TechStacks";
+import { posProjectImages } from "../constants/projects";
 
 const FeaturedProject = () => {
   const ref = useRef(null);
@@ -92,20 +91,20 @@ const FeaturedProject = () => {
       >
         <Carousel className="w-full  ">
           <CarouselContent className="-ml-1 ">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {posProjectImages.map((img, index) => (
               <CarouselItem key={index} className=" pl-1 lg:basis-full ">
                 <div className="">
                   <Card>
                     <CardContent className=" h-[28rem] md:h-[19rem]">
                       <Image
-                        src={desktop}
+                        src={img}
                         alt={"project"}
                         className={
                           "size-full max-md:hidden  object-cover rounded-md"
                         }
                       />
                       <Image
-                        src={mobile}
+                        src={img}
                         alt={"project"}
                         className={
                           "size-full md:hidden object-cover rounded-sm"

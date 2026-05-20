@@ -1,18 +1,16 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
+import MoziInHomepage from "@/components/mozi/MoziInHomepage";
 import { Button } from "@/components/ui/button";
-import me from "../assets/me-vertical.png";
-import Image from "next/image";
 import {
   heroPhoto,
   staggerContainer,
   staggerItem,
 } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
-import { MoziModal, MoziWidget } from "@/components/mozi";
-import MoziInHomepage from "@/components/mozi/MoziInHomepage";
+import { motion } from "motion/react";
+import Image from "next/image";
+import me from "../assets/me-vertical.png";
 
 const Hero = () => {
   const stagger = useAnimationVariants(staggerContainer);

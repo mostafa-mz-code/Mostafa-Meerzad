@@ -1,17 +1,21 @@
 import { StaticImageData } from "next/image";
-import chattyMobile from "../assets/chatty-mobile.webp";
+
 import gameHubMobile from "../assets/game-hub-mobile.webp";
 import promptopiaMobile from "../assets/promptopia-mobile.webp";
 import spaceTourismMobile from "../assets/space-tourism-mobile.webp";
 import urlShortenerMobile from "../assets/urlshortener-mobile.webp";
 
-import chattyDesktop from "../assets/chatty-desktop.webp";
+import movieFlexDesktop from "../assets/movieflex-home-screen.png";
 import gameHubDesktop from "../assets/game-hub-desktop.webp";
 import posSystemDesktop from "../assets/pos-system-desktop.webp";
 import promptopiaDesktop from "../assets/promptopia-desktop.webp";
 import shereadsDesktop from "../assets/shereads-desktop.webp";
 import spaceTourismDesktop from "../assets/space-tourism-desktop.webp";
 import urlShortenerDesktop from "../assets/urlshortener-desktop.webp";
+
+import img1 from "../assets/pos-desktop-main.webp";
+import img2 from "../assets/pos-desktop-login.webp";
+import img3 from "../assets/pos-desktop-reports.webp";
 
 export type ProjectType = {
   name: string;
@@ -29,6 +33,16 @@ export type ProductionType = Omit<ProjectType, "preview"> & {
   isPublic: boolean;
   subtitle: string;
   preview?: { href: string; title: string };
+  label?: string;
+};
+
+export type TopProjectType = {
+  title: string;
+  subtitle: string;
+  desc: string;
+  techs: string[];
+  live: { href: string; title: string };
+  repo: { href: string; title: string };
 };
 
 const productionProjects: ProductionType[] = [
@@ -40,7 +54,7 @@ const productionProjects: ProductionType[] = [
       "Custom point-of-sale platform built for a local pet supplies business. Manages sales, inventory, customers, suppliers, deliveries, and multi-branch operations — with no branch limit. Currently live across 3 branches with full management control.",
     technologies: [
       "Next.js",
-      "TypeScript",
+
       "MySQL",
       "Prisma",
       "Zustand",
@@ -49,6 +63,7 @@ const productionProjects: ProductionType[] = [
       "Framer Motion",
     ],
     isPublic: false,
+    label: "Internal app · not publicly accessible",
     desktopImg: posSystemDesktop,
     mobileImg: posSystemDesktop,
   },
@@ -66,6 +81,7 @@ const productionProjects: ProductionType[] = [
       "Tailwind",
       "Framer Motion",
     ],
+    label: "shereadsapp.com",
     preview: { href: "https://shereadsapp.com", title: "shereads.com" },
     isPublic: true,
 
@@ -114,25 +130,45 @@ const personalProjects: ProjectType[] = [
     mobileImg: gameHubMobile,
   },
   {
-    type: "03 · Full Stack · Real-time",
-    name: "Chatty",
+    type: "03 · Mobile App · React Native",
+    name: "Movie Flex",
     description:
-      "Real-time chat app with the MERN stack and Socket.io. Auth, scalable messaging, and responsive UI. Built during Coding Samurai internship — focused on performance and security.",
+      "MovieFlex is a modern React Native movie discovery app built with Expo. Users can explore trending movies, search for titles, view detailed movie information, watch trailers, save movies for later, and receive personalized movie suggestions.",
     technologies: [
-      "Node.js",
-      "React.js",
-      "MongoDB",
-      "Socket.io",
-      "Express.js",
-      "axios",
-      "Tailwindcss",
+      "React Native",
+      "Expo",
+      "NativeWind",
+      "Axios",
+      "TMDB API",
+      "Custom Backend",
     ],
 
-    github: "https://github.com/mostafa-meerzad/realtime-chat-app.git",
-    preview: "https://realtime-chat-app-r0wc.onrender.com/",
-    desktopImg: chattyDesktop,
-    mobileImg: chattyMobile,
+    github: "https://github.com/mostafa-mz-code/movie-flex",
+    preview:
+      "https://www.linkedin.com/posts/mostafa-meerzad-a753371b7_reactnative-expo-javascript-ugcPost-7461812493418393600-uhGY?utm_source=share&utm_medium=member_desktop&rcm=ACoAADJqvDkBDeSRqTEnAva7Pvf1fuVpkZC4AEE",
+    desktopImg: movieFlexDesktop,
+    mobileImg: movieFlexDesktop,
   },
+  // {
+  //   type: "03 · Full Stack · Real-time",
+  //   name: "Chatty",
+  //   description:
+  //     "Real-time chat app with the MERN stack and Socket.io. Auth, scalable messaging, and responsive UI. Built during Coding Samurai internship — focused on performance and security.",
+  //   technologies: [
+  //     "Node.js",
+  //     "React.js",
+  //     "MongoDB",
+  //     "Socket.io",
+  //     "Express.js",
+  //     "axios",
+  //     "Tailwindcss",
+  //   ],
+
+  //   github: "https://github.com/mostafa-meerzad/realtime-chat-app.git",
+  //   preview: "https://realtime-chat-app-r0wc.onrender.com/",
+  //   desktopImg: chattyDesktop,
+  //   mobileImg: chattyMobile,
+  // },
   {
     type: "04 · Frontend · Landing page",
     name: "Space Tourism",
@@ -144,44 +180,11 @@ const personalProjects: ProjectType[] = [
     desktopImg: spaceTourismDesktop,
     mobileImg: spaceTourismMobile,
   },
-
-  // {
-  //   type: "05 · Full Stack · Feature Rich",
-  //   name: "Issue Tracker",
-  //   description:
-  //     "A full-featured Issue Tracking System built with Next.js 14, TypeScript, Prisma, and MySQL. Designed for developers and teams to manage bugs, tasks, and feature requests with ease — complete with filtering, role-based assignment, validation, and interactive charts.",
-  //   technologies: [
-  //     "Next.js",
-  //     "TypeScript",
-  //     "Prisma",
-  //     "Axios",
-  //     "MySQL",
-  //     "Zod",
-  //     "Tailwindcss",
-  //     "Chakra UI",
-  //   ],
-
-  //   github: "https://github.com/mostafa-meerzad/issue-tracker.git",
-  //   preview: "https://issue-tracker-two-smoky.vercel.app/",
-  //   desktopImg: issueTrackerDesktop,
-  //   mobileImg: issueTrackerMobile,
-  // },
-  // {
-  //   type: "06 · Landing page Replica",
-  //   name: "Nike",
-  //   description:
-  //     "A clean, responsive Nike-themed landing page built with React and Tailwind CSS. This project was created as part of my journey to master modern CSS utility-first design using Tailwind, inspired by a tutorial by JavaScript Mastery.",
-  //   technologies: ["React.js", "Tailwindcss", "Vite"],
-  //   github: "https://github.com/mostafa-meerzad/nike.git",
-  //   preview: "https://serene-biscotti-6c2764.netlify.app/",
-  //   desktopImg: nikeDesktop,
-  //   mobileImg: nikeMobile,
-  // },
   {
     type: "05 · Full Stack · MERN",
-    name: "URL Shortener",
+    name: "Shortly",
     description:
-      "A feature-rich URL shortener application built with the MERN stack. Users can shorten long URLs, manage them through CRUD operations, and even add custom aliases. Authenticated users enjoy advanced features, while guests can still shorten links effortlessly.",
+      "A URL shortener application built with the MERN stack. Users can shorten long URLs, manage them through CRUD operations, and even add custom aliases. Authenticated users enjoy advanced features, while guests can still shorten links effortlessly.",
     technologies: [
       "Node.js",
       "Express.js",
@@ -191,10 +194,51 @@ const personalProjects: ProjectType[] = [
       "Axios",
     ],
     github: "https://github.com/mostafa-meerzad/url-shortener.git",
-    preview: "https://github.com/mostafa-meerzad/url-shortener.git",
+    preview: "https://url-shortener-1-09s5.onrender.com/",
     desktopImg: urlShortenerDesktop,
     mobileImg: urlShortenerMobile,
   },
 ];
 
-export { personalProjects, productionProjects };
+const posProjectImages = [img1, img2, img3];
+
+const topProjects: TopProjectType[] = [
+  {
+    title: "SheReads",
+    desc: "Online reading platform with book recommendations, search, filter, and full admin panel. Live worldwide.",
+    techs: ["Next.js", "TypeScript", "Tialwind"],
+    subtitle: "01 · Professional",
+    repo: { href: "", title: "" },
+    live: { href: "https://shereadsapp.com", title: "shereadsapp.com" },
+  },
+  {
+    title: "Chatty",
+    desc: "Real-time MERN chat app with Socket.io. Auth, scalable messaging, and responsive UI.",
+    techs: ["MERN", "Socket.id", "JWT"],
+    subtitle: "02 · Personal",
+    repo: {
+      href: "https://github.com/mostafa-meerzad/realtime-chat-app.git",
+      title: "View GitHub",
+    },
+    live: {
+      href: "https://realtime-chat-app-r0wc.onrender.com/",
+      title: "Live Demo",
+    },
+  },
+  {
+    title: "Promptopia",
+    desc: "Full-stack AI prompt sharing app. Create, manage, and discover high-quality prompts.",
+    techs: ["Next.js", "PostgreSQL", "Prisma"],
+    subtitle: "03 · Professional",
+    repo: {
+      href: "https://github.com/mostafa-meerzad/promptopia.git",
+      title: "View GitHub",
+    },
+    live: {
+      href: "https://promptopia-black-beta.vercel.app/",
+      title: "shereadsapp.com",
+    },
+  },
+];
+
+export { personalProjects, productionProjects, posProjectImages, topProjects };

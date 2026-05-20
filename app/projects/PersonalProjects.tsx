@@ -82,6 +82,7 @@ const Project = ({
           <Link
             href={github!}
             rel={"noopener noreferrer"}
+            target={"_blank"}
             className={
               "border border-muted-foreground/30 px-6 py-1 rounded-sm bg-muted/20 font-courier text-xs"
             }
@@ -98,6 +99,7 @@ const Project = ({
           <Link
             href={preview!}
             rel={"noopener noreferrer"}
+            target={"_blank"}
             className={
               " flex justify-center items-center gap-2 border border-primary/20 px-6 py-1 rounded-sm bg-primary/10 font-courier text-xs text-primary"
             }
