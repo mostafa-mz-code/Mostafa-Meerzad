@@ -11,6 +11,7 @@ import {
   staggerContainer,
 } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { productionProjects } from "../constants/projects";
 
 type Props = {
   badge: string;
@@ -143,48 +144,19 @@ const Experience = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <Project
-          badge={"Production · Backend focus"}
-          title={"POS System"}
-          desc={
-            "Full-stack point-of-sale platform for a local pet supplies business. Manages sales, inventory, customers, suppliers, deliveries, and multi-branch operations. No branch limit — currently live across 3 branches."
-          }
-          techs={[
-            "Next.js",
-            " TypeScript",
-            "MySQL",
-            " Prisma",
-            " Zustand",
-            "ShadCN",
-            " Tailwind",
-            "Framer Motion",
-          ]}
-          href={""}
-          label={"Internal app · not publicly accessible"}
-          isPublic={false}
-          slideVariant={slideInLeft}
-        />
-
-        <Project
-          badge={"Production · Frontend focus"}
-          title={"SheReads"}
-          desc={
-            "Online reading platform serving users globally. Features book discovery, preference-based recommendations, search and filtering, and a full admin panel for content management."
-          }
-          techs={[
-            "Next.js",
-            "TypeScript",
-            " MySQL",
-            "Prisma",
-            "ShadCN",
-            " Tailwind",
-            "Framer Motion",
-          ]}
-          href={"https://shereadsapp.com"}
-          label={"shereadsapp.com"}
-          isPublic={true}
-          slideVariant={slideInRight}
-        />
+        {productionProjects.map((item, index) => (
+          <Project
+            key={index}
+            badge={item.badges.join(" · ")}
+            title={item.name}
+            desc={item.description}
+            techs={item.technologies}
+            href={item.preview?.href ?? ""}
+            label={item.label!}
+            isPublic={item.isPublic}
+            slideVariant={slideInLeft}
+          />
+        ))}
       </motion.div>
     </section>
   );
