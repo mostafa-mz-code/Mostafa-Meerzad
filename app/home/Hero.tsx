@@ -11,11 +11,13 @@ import { useAnimationVariants } from "@/lib/use-reduced-motion";
 import { motion } from "motion/react";
 import Image from "next/image";
 import me from "../assets/me-vertical.png";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const stagger = useAnimationVariants(staggerContainer);
   const item = useAnimationVariants(staggerItem);
   const photoV = useAnimationVariants(heroPhoto);
+  const router = useRouter();
 
   return (
     <div
@@ -65,7 +67,7 @@ const Hero = () => {
           >
             Self-taught in Kabul. Built{" "}
             <strong className={"text-white"}>production apps</strong> used by
-            real businesses. Top 10 GitHub committer in Afghanistan. Now
+            real businesses. Top 26 GitHub committer in Afghanistan. Now
             shipping at <strong className={"text-white"}>Webistan.cloud</strong>{" "}
             — looking for my next challenge.
           </p>
@@ -80,7 +82,12 @@ const Hero = () => {
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.15 }}
               >
-                <Button variant={"default"}>See My Work</Button>
+                <Button
+                  onClick={() => router.push("/projects")}
+                  variant={"default"}
+                >
+                  See My Work
+                </Button>
               </motion.div>
               <motion.div
                 className="[will-change:transform]"
@@ -88,7 +95,11 @@ const Hero = () => {
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.15 }}
               >
-                <Button variant={"outline"}>Download Resume</Button>
+                <Button asChild variant={"outline"}>
+                  <a href="/Mostafa_Meerzad_Resume.pdf" download>
+                    Download Resume
+                  </a>
+                </Button>
               </motion.div>
             </div>
 
@@ -138,7 +149,11 @@ const Hero = () => {
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.15 }}
             >
-              <Button variant={"outline"}>Download Resume</Button>
+              <Button asChild variant={"outline"}>
+                <a href="/Mostafa_Meerzad_Resume.docx" download>
+                  Download Resume
+                </a>
+              </Button>
             </motion.div>
           </div>
           <MoziInHomepage />
