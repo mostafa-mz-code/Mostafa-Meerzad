@@ -206,7 +206,7 @@ const topProjects: TopProjectType[] = [
   {
     title: "SheReads",
     desc: "Online reading platform with book recommendations, search, filter, and full admin panel. Live worldwide.",
-    techs: ["Next.js", "TypeScript", "Tialwind"],
+    techs: ["Next.js", "TypeScript", "Tailwind"],
     subtitle: "01 · Professional",
     repo: { href: "", title: "" },
     live: { href: "https://shereadsapp.com", title: "shereadsapp.com" },
@@ -236,7 +236,7 @@ const topProjects: TopProjectType[] = [
     },
     live: {
       href: "https://promptopia-black-beta.vercel.app/",
-      title: "shereadsapp.com",
+      title: "Live Demo",
     },
   },
 ];

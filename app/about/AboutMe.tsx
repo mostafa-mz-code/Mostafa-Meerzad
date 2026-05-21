@@ -154,14 +154,14 @@ const AboutMe = () => {
         <motion.div
           variants={fade}
           className={
-            "flex flex-col justify-center gap-1.5 xl:gap-2 px-5 xl:px-8 py-2 md:py-5 bg-gradient-to-r from-transparent to-primary/30 rounded-xl w-sm md:w-[28rem] lg:w-[25rem] font-georgia text-[14px]  -rotate-y-16 relative md:self-end md:-top-5 [will-change:transform]  border-transparent"
+            "flex flex-col justify-center gap-1.5 xl:gap-2 px-5 xl:px-8 py-2 md:py-5 bg-gradient-to-r from-transparent to-primary/30 rounded-xl w-sm md:w-[28rem] lg:w-[33rem] 2xl:w-[25rem] font-georgia text-[14px]  relative md:self-end md:-top-5 [will-change:transform]  border-transparent"
           }
-          style={{ rotateY: "-20deg" }}
+          style={{ rotateY: "-18deg" }}
           whileHover={{
             y: -2,
             borderColor: "rgba(62,207,142,0.3)",
             rotateY: "-12deg",
-            scale: 1.01,
+            scale: 1.02,
           }}
           transition={{ duration: 0.2 }}
         >
@@ -207,14 +207,14 @@ const AboutMe = () => {
         <motion.div
           variants={fade}
           className={
-            "flex flex-col justify-center gap-2 md:gap-3 2xl:gap-2 px-5 xl:px-8 py-2 md:py-5 bg-gradient-to-r from-gray-800/30 to-primary/50 rounded-xl w-sm md:w-[25rem] font-georgia text-sm  -rotate-y-16 relative border-r border-r-primary [will-change:transform]  border-transparent"
+            "flex flex-col justify-center gap-2 md:gap-3 2xl:gap-2 px-5 xl:px-8 py-2 md:py-5 bg-gradient-to-r from-gray-800/30 to-primary/50 rounded-xl w-sm md:w-[22rem] lg:w-[25rem] font-georgia text-sm  relative border-r border-r-primary [will-change:transform]  border-transparent"
           }
           style={{ rotateY: "-20deg" }}
           whileHover={{
             y: -2,
             borderColor: "rgba(62,207,142,0.3)",
             rotateY: "-15deg",
-            scale: 1.01,
+            scale: 1.02,
           }}
           transition={{ duration: 0.2 }}
         >
