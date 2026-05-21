@@ -58,11 +58,12 @@ const AiChat = () => {
           <h1 className={"text-2xl font-georgia"}>Ask me anything</h1>
 
           <p
-            className={"text-sm text-muted-foreground/70 font-courier max-w-xl"}
+            className={
+              "text-sm text-muted-foreground/70 font-courier max-w-xl mb-5"
+            }
           >
             Don&#39;t want to scroll? Ask my AI assistant about my experience,
-            projects, stack, or availability. It knows everything about my work
-            — and nothing else.
+            projects, stack, or availability. It knows everything about my work.
           </p>
 
           <motion.div

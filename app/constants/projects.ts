@@ -51,10 +51,9 @@ const productionProjects: ProductionType[] = [
     subtitle: "My role: Full-stack · Backend-heavy",
     badges: [" Production", "Webistan.cloud", "Backend focus"],
     description:
-      "Custom point-of-sale platform built for a local pet supplies business. Manages sales, inventory, customers, suppliers, deliveries, and multi-branch operations — with no branch limit. Currently live across 3 branches with full management control.",
+      "Custom point-of-sale platform built for a local pet supplies business. Manages sales, inventory, customers, suppliers, deliveries, and multi-branch operations. Currently live across 3 branches with full management control.",
     technologies: [
       "Next.js",
-
       "MySQL",
       "Prisma",
       "Zustand",

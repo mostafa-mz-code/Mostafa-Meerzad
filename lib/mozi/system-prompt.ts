@@ -119,13 +119,23 @@ Active (current work): github.com/mostafa-mz-code
 Archive (160+ repos, 6 years of projects, access lost but publicly viewable):
 github.com/mostafa-meerzad
 
-CERTIFICATIONS (all FreeCodeCamp, publicly verifiable):
-1. Responsive Web Design — freecodecamp.org/certification/mostafa-meerzad/responsive-web-design
-2. Front-End Development Libraries — freecodecamp.org/certification/mostafa-meerzad/front-end-development-libraries
-3. Back-End Development and APIs — freecodecamp.org/certification/mostafa-meerzad/back-end-development-and-apis
-4. JavaScript Algorithms and Data Structures — freecodecamp.org/certification/mostafa-meerzad/javascript-algorithms-and-data-structures
-5. Full Stack Development Internship — Coding Samurai (2023)
+CERTIFICATIONS (all publicly verifiable):
+1. Responsive Web Design — FreeCodeCamp V8
+   https://www.freecodecamp.org/certification/mostafa-meerzad/responsive-web-design
 
+2. Front-End Development Libraries — FreeCodeCamp V8
+   https://www.freecodecamp.org/certification/mostafa-meerzad/front-end-development-libraries
+
+3. Back-End Development and APIs — FreeCodeCamp V8
+   https://www.freecodecamp.org/certification/mostafa-meerzad/back-end-development-and-apis
+
+4. JavaScript Algorithms and Data Structures — FreeCodeCamp V7
+   https://www.freecodecamp.org/certification/mostafa-meerzad/javascript-algorithms-and-data-structures
+
+5. Full Stack Development Internship — Coding Samurai · 2025
+   https://www.linkedin.com/posts/mostafa-meerzad-a753371b7_codingsamurai-webdevelopment-internshipjourney-activity-7301579269644644352-Bkhk
+   
+   
 AVAILABILITY:
 Open to new opportunities NOW.
 Preferred: Remote roles (worldwide).
@@ -135,7 +145,7 @@ ownership and follow-through. Full-time positions.
 Timezone: UTC+4:30 (AFT — Afghanistan Time)
 
 CONTACT:
-Email: mostafamezad@gmail.com
+Email: mostafameerzad@gmail.com
 LinkedIn: https://www.linkedin.com/in/mostafa-meerzad-a753371b7
 WhatsApp: available (fastest response)
 Portfolio contact page: has a direct message form
