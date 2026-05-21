@@ -2,11 +2,9 @@
 
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import {
-  staggerContainer,
-  staggerItem,
-} from "@/lib/motion-variants";
+import { staggerContainer, staggerItem } from "@/lib/motion-variants";
 import { useAnimationVariants } from "@/lib/use-reduced-motion";
+import { info } from "../constants/advantages";
 
 const About = () => {
   const ref = useRef(null);
@@ -14,12 +12,6 @@ const About = () => {
   const stagger = useAnimationVariants(staggerContainer);
   const item = useAnimationVariants(staggerItem);
 
-  const info = [
-    { item: "4", addon: "+", desc: "years of experience" },
-    { item: "160", addon: "+", desc: "public repos" },
-    { item: "top", addon: "10", desc: "github · committer" },
-    { item: "2", addon: null, desc: "professional apps shipped" },
-  ];
   return (
     <motion.div
       ref={ref}
