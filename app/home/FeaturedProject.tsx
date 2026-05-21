@@ -98,14 +98,14 @@ const FeaturedProject = () => {
                     <CardContent className=" h-[28rem] md:h-[19rem]">
                       <Image
                         src={img}
-                        alt={"project"}
+                        alt={"Screenshot of Webistan.cloud POS System"}
                         className={
                           "size-full max-md:hidden  object-cover rounded-md"
                         }
                       />
                       <Image
                         src={img}
-                        alt={"project"}
+                        alt={"Screenshot of Webistan.cloud POS System"}
                         className={
                           "size-full md:hidden object-cover rounded-sm"
                         }

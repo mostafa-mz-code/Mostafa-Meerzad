@@ -45,7 +45,7 @@ const AboutMe = () => {
           <div className="absolute bg-transparent size-10 lg:size-16 bottom-0 right-0  border-primary/40 border-r-1 border-b-1 rounded-br-sm "></div>
           <Image
             src={me}
-            alt={"me"}
+            alt={"Portrait of Mostafa Meerzad"}
             className={"  w-full h-full  object-contain"}
           />
         </div>

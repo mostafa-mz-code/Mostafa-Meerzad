@@ -11,29 +11,46 @@ import MoziWidget from "@/components/mozi/MoziWidget";
 import { NotFoundProvider } from "./context/NotFoundContext";
 
 export const metadata = {
-  title: "Mostafa Meerzad | Full Stack Developer",
+  title: {
+    default: "Mostafa Meerzad | Full Stack Developer",
+    template: "%s | Mostafa Meerzad",
+  },
   description:
-    "Portfolio of Mostafa Meerzad - React, Node.js, MongoDB, Tailwind, and more.",
+    "Mostafa Meerzad is a full stack developer from Kabul building production MERN/PERN apps, open-source tools, and business web experiences at Webistan.cloud.",
   keywords: [
     "Mostafa Meerzad",
     "Full Stack Developer",
-    "React",
-    "Node.js",
+    "MERN",
+    "PERN",
     "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Prisma",
     "Portfolio",
+    "Kabul developer",
+    "Webistan.cloud",
   ],
+  authors: [
+    {
+      name: "Mostafa Meerzad",
+      url: "https://www.linkedin.com/in/mostafa-meerzad-a753371b7/",
+    },
+  ],
+  creator: "Mostafa Meerzad",
+  publisher: "Mostafa Meerzad",
   openGraph: {
     title: "Mostafa Meerzad | Full Stack Developer",
     description:
-      "Showcasing beautiful, real-world projects built with modern web tech.",
+      "Explore production web applications, open-source projects, and developer experience from Mostafa Meerzad.",
     url: "https://portfolio-navy-seven-11.vercel.app",
     siteName: "Mostafa Meerzad Portfolio",
     images: [
       {
-        url: "/preview-image.webp",
+        url: "/avatar-bg-pattern.webp",
         width: 1200,
         height: 630,
-        alt: "Portfolio Preview",
+        alt: "Mostafa Meerzad portfolio preview",
       },
     ],
     type: "website",
@@ -41,10 +58,26 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mostafa Meerzad | Full Stack Developer",
-    description: "Explore Mostafa's projects and experience.",
-    images: ["/preview-image.webp"],
+    description:
+      "Explore Mostafa's portfolio—production apps, GitHub work, and software projects built with Next.js, React, and Node.js.",
+    images: ["/avatar-bg-pattern.webp"],
+  },
+  alternates: {
+    canonical: "/",
   },
   metadataBase: new URL("https://portfolio-navy-seven-11.vercel.app"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": 400,
+    },
+  },
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
 };
 
 const urbanist = Urbanist({
@@ -83,18 +116,18 @@ export default function RootLayout({
         />
         <ToasterComponent />
         <NotFoundProvider>
-        <LayoutWrapper>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </ThemeProvider>
-        </LayoutWrapper>
+          <LayoutWrapper>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </ThemeProvider>
+          </LayoutWrapper>
         </NotFoundProvider>
         <MoziWidget />
       </body>

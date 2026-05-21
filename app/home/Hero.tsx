@@ -107,7 +107,7 @@ const Hero = () => {
         <div className="absolute bg-transparent size-16 lg:size-28 xl:size-40 bottom-0 right-0  border-primary border-r-2 border-b-2 rounded-br-sm lg:rounded-br-md"></div>
         <Image
           src={me}
-          alt={"me"}
+          alt={"Portrait of Mostafa Meerzad"}
           className={"  w-full h-full  object-contain"}
         />
       </motion.div>

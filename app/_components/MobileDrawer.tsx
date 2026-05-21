@@ -28,7 +28,7 @@ const MobileDrawer = () => {
           <div className="flex items-center gap-4 mt-2">
             <Image
               src={me}
-              alt="Mostafa meerzad"
+              alt="Profile photo of Mostafa Meerzad"
               width={100}
               height={100}
               className="rounded-full border shadow-sm object-cover w-14 h-14"

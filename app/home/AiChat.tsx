@@ -78,7 +78,6 @@ const AiChat = () => {
               speed="5s"
               onClick={() => setIsOpen((prev) => !prev)}
               style={{}}
-              
             >
               <div
                 className={"flex items-center gap-2 text-[#378add] text-sm "}
@@ -115,9 +114,11 @@ const AiChat = () => {
             <input
               type="text"
               placeholder="Ask me anything about Mostafa..."
+              aria-label="Ask a question about Mostafa's experience, projects, or availability"
               className="flex-1 bg-[#0e0e18] border border-white/[0.08] rounded-md px-4 py-2.5 text-[13px] font-mono text-white/70 placeholder-white/20 outline-none focus:border-[#3ecf8e]/30 transition-colors disabled:opacity-50"
             />
             <motion.button
+              aria-label="Send chat question"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               transition={{ duration: 0.15 }}
