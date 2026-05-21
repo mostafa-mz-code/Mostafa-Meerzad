@@ -40,7 +40,6 @@ const MobileDrawer = () => {
               </div>
             </div>
           </div>
-          {/* <ModeToggle /> */}
         </div>
         {/* Navigation Items */}
         <nav className="space-y-2 mt-5 ml-2">

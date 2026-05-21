@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Urbanist } from "next/font/google";
 import structuredData from "../structured-data.json";
 import Footer from "./Footer";
@@ -104,7 +103,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={`${urbanist.variable} ${courier.variable} ${georgia.variable} ${georgiaBold.variable}`}
       >
@@ -117,16 +116,9 @@ export default function RootLayout({
         <ToasterComponent />
         <NotFoundProvider>
           <LayoutWrapper>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
-            </ThemeProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
           </LayoutWrapper>
         </NotFoundProvider>
         <MoziWidget />
