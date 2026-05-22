@@ -18,7 +18,7 @@ export default function LayoutWrapper({ children }: Props) {
     if (isNotFound) {
       return "bg-[url('/bg-404.webp')]"; // Your 404 background
     }
-    return "bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-dark.webp')] md:dark:bg-[url('/bg-home-dark.webp')]";
+    return "bg-[url('/bg-home-dark-mobile.jpg')] md:bg-[url('/bg-home-dark.png')] md:dark:bg-[url('/bg-home-dark.png')]";
   })();
 
   const isProjectsOrContactPage =
