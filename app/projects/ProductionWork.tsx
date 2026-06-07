@@ -35,7 +35,7 @@ const Project = ({
         className="rounded-lg border border-transparent [will-change:transform]"
       >
         <Card
-          className={`grid grid-cols-1 max-lg:grid-rows-2 lg:grid-cols-2 xl:grid-rows-[28rem] border-0 p-0  ${isEven ? "bg-gradient-to-r border-l-2 border-l-primary" : "bg-gradient-to-l border-r-2 border-r-primary"} from-primary/20 to-[rgba(10,10,15,0.9)] relative`}
+          className={`grid grid-cols-1 max-lg:grid-rows-auto_ifr lg:grid-cols-2 xl:grid-rows-[28rem] border-0 p-0  ${isEven ? "bg-gradient-to-r border-l-2 border-l-primary" : "bg-gradient-to-l border-r-2 border-r-primary"} from-primary/20 to-[rgba(10,10,15,0.9)] relative`}
         >
           <div
             className={`max-lg:row-start-1 max-lg:row-end-2 ${isEven ? "lg:col-start-2 lg:pl-2" : "lg:col-start-1 lg:pr-2"} row-start-1 flex flex-col h-full items-start justify-around gap-5 px-5 py-8 lg:p-10`}
@@ -130,7 +130,7 @@ const Project = ({
               aria-label="card-image"
               alt={name}
               src={mobileImg}
-              className="w-full h-full object-cover object-top rounded-lg sm:hidden"
+              className="w-full h-full object-contain object-top rounded-lg sm:hidden"
             />
           </motion.div>
         </Card>

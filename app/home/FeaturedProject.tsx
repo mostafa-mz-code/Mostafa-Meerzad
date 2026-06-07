@@ -107,7 +107,7 @@ const FeaturedProject = () => {
                         src={img}
                         alt={"Screenshot of Webistan.cloud POS System"}
                         className={
-                          "size-full md:hidden object-cover rounded-sm"
+                          "size-full md:hidden object-contain rounded-sm"
                         }
                       />
                     </CardContent>
